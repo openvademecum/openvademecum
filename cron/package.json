@@ -1,0 +1,24 @@
+{
+  "name": "openvademecum",
+  "version": "1.0.0",
+  "description": "Open Vademecum Project",
+  "main": "index.js",
+  "author": {
+    "name": "Alejandro González",
+    "email": "alejandro.gon.per@gmail.com",
+    "url": "http://alejandrogonzalez.me/"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/algope/openvademecum"
+  },
+  "dependencies": {
+    "fstream": "^1.0.10",
+    "request": "^2.79.0",
+    "unzip": "^0.1.11"
+  }
+}
