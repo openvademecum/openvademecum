@@ -19,6 +19,8 @@
   "dependencies": {
     "fstream": "^1.0.10",
     "request": "^2.79.0",
-    "unzip": "^0.1.11"
+    "sails-memory": "^0.10.7",
+    "unzip": "^0.1.11",
+    "waterline": "^0.11.6"
   }
 }
