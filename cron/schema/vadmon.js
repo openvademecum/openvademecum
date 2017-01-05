@@ -10,12 +10,15 @@ var Vadmon = Waterline.Collection.extend({
 
   // Attributes are basic pieces of information about a model
   attributes: {
-    codigoviaadministracion: {
+    cod_via_admin: {
       type:'integer',
       unique: true
     },
-    viaadministracion: {
+    via_admin: {
       type:'string'
+    },
+    prescripcion_for_far:{
+      model: 'prescripcion_for_far'
     }
   },
   updateOrCreate: function(criteria, values, cb){

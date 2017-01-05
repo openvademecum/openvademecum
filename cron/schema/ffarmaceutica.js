@@ -10,14 +10,14 @@ var Ffarmaceutica = Waterline.Collection.extend({
 
   // Attributes are basic pieces of information about a model
   attributes: {
-    codigoformafarmaceutica: {
+    cod_forfar: {
       type:'integer',
       unique: true
     },
-    formafarmaceutica: {
+    forfar: {
       type:'string'
     },
-    codigoformafarmaceuticasimplificada: {
+    cod_forfar_simplificada: {
       type:'integer'
     }
   },

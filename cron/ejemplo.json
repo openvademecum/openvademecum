@@ -1,0 +1,304 @@
+{
+	"prescription": [{
+		"cod_nacion": ["600000"],
+		"nro_definitivo": ["66337"],
+		"des_nomco": ["AMOXICILINA /ACIDO CLAVULANICO SALA 500/50 mg POLVO PARA SOLUCION INYECTABLE Y PARA PERFUSION EFG"],
+		"des_prese": ["AMOXICILINA /ACIDO CLAVULANICO SALA 500/50 mg POLVO PARA SOLUCION INYECTABLE Y PARA PERFUSION EFG, 100 viales"],
+		"cod_dcsa": ["89519005"],
+		"cod_dcp": ["2431000140106"],
+		"cod_dcpf": ["2441000140100"],
+		"des_dosific": ["500 mg/50 mg"],
+		"cod_envase": ["45"],
+		"contenido": ["100"],
+		"unid_contenido": ["41"],
+		"nro_conte": ["100 viales"],
+		"sw_psicotropo": ["0"],
+		"sw_estupefaciente": ["0"],
+		"sw_afecta_conduccion": ["0"],
+		"sw_triangulo_negro": ["0"],
+		"url_fictec": ["http://www.aemps.gob.es/cima/pdfs/es/ft/66337/66337_ft.pdf"],
+		"url_prosp": ["http://www.aemps.gob.es/cima/pdfs/es/p/66337/66337_p.pdf"],
+		"sw_receta": ["1"],
+		"sw_generico": ["1"],
+		"sw_sustituible": ["1"],
+		"sw_envase_clinico": ["1"],
+		"sw_uso_hospitalario": ["1"],
+		"sw_diagnostico_hospitalario": ["0"],
+		"sw_tld": ["0"],
+		"sw_especial_control_medico": ["0"],
+		"sw_huerfano": ["0"],
+		"sw_base_a_plantas": ["0"],
+		"laboratorio_titular": ["2335"],
+		"laboratorio_comercializador": ["2335"],
+		"fecha_autorizacion": ["2004-09-16"],
+		"sw_comercializado": ["1"],
+		"fec_comer": ["2012-01-02"],
+		"cod_sitreg": ["1"],
+		"cod_sitreg_presen": ["1"],
+		"fecha_situacion_registro": ["2004-09-16"],
+		"fec_sitreg_presen": ["2004-09-16"],
+		"sw_tiene_excipientes_decl_obligatoria": ["0"],
+		"biosimilar": ["0"],
+		"importacion_paralela": ["0"],
+		"formasfarmaceuticas": [{
+			"cod_forfar": ["288"],
+			"cod_forfar_simplificada": ["34"],
+			"nro_pactiv": ["2"],
+			"composicion_pa": [{
+				"cod_principio_activo": ["160"],
+				"orden_colacion": ["1"],
+				"dosis_pa": ["500"],
+				"unidad_dosis_pa": ["mg"],
+				"dosis_composicion": ["1"],
+				"unidad_composicion": ["vial inyección"],
+				"dosis_administracion": ["1"],
+				"unidad_administracion": ["vial inyección"],
+				"dosis_prescripcion": ["500/50"],
+				"unidad_prescripcion": ["mg/mg"]
+			}, {
+				"cod_principio_activo": ["5418"],
+				"orden_colacion": ["2"],
+				"dosis_pa": ["50"],
+				"unidad_dosis_pa": ["mg"],
+				"dosis_composicion": ["1"],
+				"unidad_composicion": ["vial inyección"],
+				"dosis_administracion": ["1"],
+				"unidad_administracion": ["vial inyección"],
+				"dosis_prescripcion": ["500/50"],
+				"unidad_prescripcion": ["mg/mg"]
+			}],
+			"viasadministracion": [{
+				"cod_via_admin": ["49"]
+			}]
+		}],
+		"atc": [{
+			"cod_atc": ["J01CR02"],
+			"duplicidades": [{
+				"atc_duplicidad": ["J01C"],
+				"descripcion_atc_duplicidad": ["ANTIBACTERIANOS BETALACTAMICOS, PENICILINAS"],
+				"efecto_duplicidad": ["Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica."],
+				"recomendacion_duplicidad": ["Suspender el principio(s) activo(s) con la misma actividad farmacológica."]
+			}, {
+				"atc_duplicidad": ["J01D"],
+				"descripcion_atc_duplicidad": ["OTROS ANTIBACTERIANOS BETALACTAMICOS"],
+				"efecto_duplicidad": ["Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica."],
+				"recomendacion_duplicidad": ["Suspender el principio(s) activo(s) con la misma actividad farmacológica."]
+			}]
+		}]
+	}, {
+		"cod_nacion": ["600008"],
+		"nro_definitivo": ["66346"],
+		"des_nomco": ["CITALOPRAM FARMALIDER 10 mg COMPRIMIDOS RECUBIERTOS CON PELICULA"],
+		"des_prese": ["CITALOPRAM FARMALIDER 10 mg COMPRIMIDOS RECUBIERTOS CON PELICULA, 500 comprimidos"],
+		"cod_dcsa": ["321986007"],
+		"cod_dcp": ["321989000"],
+		"cod_dcpf": ["9991000140107"],
+		"des_dosific": ["10 mg"],
+		"cod_envase": ["5"],
+		"contenido": ["500"],
+		"unid_contenido": ["12"],
+		"nro_conte": ["500 comprimidos"],
+		"sw_psicotropo": ["0"],
+		"sw_estupefaciente": ["0"],
+		"sw_afecta_conduccion": ["1"],
+		"sw_triangulo_negro": ["0"],
+		"url_fictec": ["http://www.aemps.gob.es/cima/pdfs/es/ft/66346/66346_ft.pdf"],
+		"url_prosp": ["http://www.aemps.gob.es/cima/pdfs/es/p/66346/66346_p.pdf"],
+		"sw_receta": ["1"],
+		"sw_generico": ["0"],
+		"sw_sustituible": ["1"],
+		"sw_envase_clinico": ["1"],
+		"sw_uso_hospitalario": ["0"],
+		"sw_diagnostico_hospitalario": ["0"],
+		"sw_tld": ["0"],
+		"sw_especial_control_medico": ["0"],
+		"sw_huerfano": ["0"],
+		"sw_base_a_plantas": ["0"],
+		"laboratorio_titular": ["6345"],
+		"laboratorio_comercializador": ["6345"],
+		"fecha_autorizacion": ["2004-09-20"],
+		"sw_comercializado": ["0"],
+		"fec_comer": ["2013-11-04"],
+		"cod_sitreg": ["1"],
+		"cod_sitreg_presen": ["1"],
+		"fecha_situacion_registro": ["2004-09-20"],
+		"fec_sitreg_presen": ["2004-09-20"],
+		"sw_tiene_excipientes_decl_obligatoria": ["1"],
+		"biosimilar": ["0"],
+		"importacion_paralela": ["0"],
+		"formasfarmaceuticas": [{
+			"cod_forfar": ["42"],
+			"cod_forfar_simplificada": ["10"],
+			"nro_pactiv": ["1"],
+			"composicion_pa": [{
+				"cod_principio_activo": ["2802"],
+				"orden_colacion": ["1"],
+				"dosis_pa": ["10"],
+				"unidad_dosis_pa": ["mg"],
+				"dosis_composicion": ["1"],
+				"unidad_composicion": ["comprimido"],
+				"dosis_administracion": ["1"],
+				"unidad_administracion": ["comprimido"],
+				"dosis_prescripcion": ["10"],
+				"unidad_prescripcion": ["mg"]
+			}],
+			"excipientes": [{
+				"cod_excipiente": ["1025"]
+			}, {
+				"cod_excipiente": ["4661"]
+			}, {
+				"cod_excipiente": ["9142"]
+			}, {
+				"cod_excipiente": ["15305"]
+			}],
+			"viasadministracion": [{
+				"cod_via_admin": ["54"]
+			}]
+		}],
+		"atc": [{
+			"cod_atc": ["N06AB04"],
+			"interacciones_atc": [{
+				"atc_interaccion": ["A03FA03"],
+				"descripcion_atc_interaccion": ["Domperidona"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N05AA02"],
+				"descripcion_atc_interaccion": ["Levomepromazina"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N05AL05"],
+				"descripcion_atc_interaccion": ["Amisulprida"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["P01BF05"],
+				"descripcion_atc_interaccion": ["Piperaquina"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N05AD01"],
+				"descripcion_atc_interaccion": ["Haloperidol"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N06AF"],
+				"descripcion_atc_interaccion": ["Inhibidores no selectivos de la monoaminooxidasa"],
+				"efecto_interaccion": ["Aumento del riesgo de síndrome serotonérgico."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos."]
+			}, {
+				"atc_interaccion": ["C01BD"],
+				"descripcion_atc_interaccion": ["Antiarritmicos clase III"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N05AF05"],
+				"descripcion_atc_interaccion": ["Zuclopentixol"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N05BB01"],
+				"descripcion_atc_interaccion": ["Hidroxizina"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N06AB10"],
+				"descripcion_atc_interaccion": ["Escitalopram"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N05AL03"],
+				"descripcion_atc_interaccion": ["Tiaprida"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N07BC02"],
+				"descripcion_atc_interaccion": ["Metadona"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["P01CX01"],
+				"descripcion_atc_interaccion": ["Pentamidina"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N05AA01"],
+				"descripcion_atc_interaccion": ["Clorpromazina"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N05AE03"],
+				"descripcion_atc_interaccion": ["Sertindol"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N05AG02"],
+				"descripcion_atc_interaccion": ["Pimozida"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N05AL01"],
+				"descripcion_atc_interaccion": ["Sulpirida"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N06AG"],
+				"descripcion_atc_interaccion": ["Inhibidores de la monoaminooxidasa A"],
+				"efecto_interaccion": ["Aumento del riesgo de síndrome serotonérgico."],
+				"recomendacion_interaccion": ["Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento. "]
+			}, {
+				"atc_interaccion": ["N06CA02"],
+				"descripcion_atc_interaccion": ["Melitraceno con psicolépticos (flupentixol) (Deanxit(R))"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["C01BA03"],
+				"descripcion_atc_interaccion": ["Disopiramida"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["C07AA07"],
+				"descripcion_atc_interaccion": ["Sotalol"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["J01MA14"],
+				"descripcion_atc_interaccion": ["Moxifloxacino"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["N05AD08"],
+				"descripcion_atc_interaccion": ["Droperidol"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["P01BA01"],
+				"descripcion_atc_interaccion": ["Cloroquina"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["R06AD07"],
+				"descripcion_atc_interaccion": ["Mequitazina"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}, {
+				"atc_interaccion": ["R06AX25"],
+				"descripcion_atc_interaccion": ["Mizolastina"],
+				"efecto_interaccion": ["Aumento del riesgo de arritmias ventriculares."],
+				"recomendacion_interaccion": ["Asociación contraindicada. Se recomienda suspender uno de los principios activos. "]
+			}],
+			"desaconsejados_geriatria": [{
+				"alerta_geriatria": ["Pacientes con hiponatremia no iatrogénica (< 130 mmol/l)"],
+				"riesgo_pacience_geriatria": ["Riesgo de hiponatremia severa."],
+				"recomendacion_geriatria": ["Evitar su utilización. En caso de necesitar un antidepresivo,  hay alternativas más seguras como la mirtazapina para esta situación "]
+			}],
+			"duplicidades": [{
+				"atc_duplicidad": ["N06AB"],
+				"descripcion_atc_duplicidad": ["Inhibidores selectivos de la recaptacion de serotonina"],
+				"efecto_duplicidad": ["Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica."],
+				"recomendacion_duplicidad": ["Suspender el principio(s) activo(s) con la misma actividad farmacológica."]
+			}]
+		}]
+	}]
+}

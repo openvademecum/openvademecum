@@ -10,14 +10,14 @@ var Pactivos = Waterline.Collection.extend({
 
   // Attributes are basic pieces of information about a model
   attributes: {
-    nroprincipioactivo: {
+    nro_principio_activo: {
       type:'integer',
       unique: true
     },
-    codigoprincipioactivo: {
+    cod_principio_activo: {
       type:'string'
     },
-    principioactivo: {
+    principio_activo: {
       type:'string'
     }
   },

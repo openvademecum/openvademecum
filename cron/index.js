@@ -18,6 +18,11 @@ const PACTIVOS = require('./schema/pactivos.js');
 const SITRIESGO = require('./schema/sitriesgo.js');
 const UNICONT = require('./schema/unicont.js');
 const VADMON = require('./schema/vadmon.js');
+const PRESCRIPCION_ATC = require('./schema/prescripcion_atc.js');
+const PRESCRIPCION_COM_PA = require('./schema/prescripcion_com_pa.js');
+const PRESCRIPCION_DUP = require('./schema/prescripcion_dup.js');
+const PRESCRIPCION_FOR_FAR = require('./schema/prescripcion_for_far.js');
+const PRESCRIPCION = require('./schema/prescripcion.js');
 const WaterlineConfig = require('./schema/config.js');
 
 var pull = false;
@@ -38,6 +43,11 @@ waterline.loadCollection(PACTIVOS);
 waterline.loadCollection(SITRIESGO);
 waterline.loadCollection(UNICONT);
 waterline.loadCollection(VADMON);
+waterline.loadCollection(PRESCRIPCION_ATC);
+waterline.loadCollection(PRESCRIPCION_COM_PA);
+waterline.loadCollection(PRESCRIPCION_DUP);
+waterline.loadCollection(PRESCRIPCION_FOR_FAR);
+waterline.loadCollection(PRESCRIPCION);
 
 if(pull){
   request('http://listadomedicamentos.aemps.gob.es/prescripcion.zip')
@@ -52,7 +62,7 @@ if(pull){
     })
   })
 }else{
-  updateDCP();
+  updateATC();
 }
 
 function updateATC(){
@@ -70,13 +80,13 @@ function updateATC(){
           var codigoatc = index[item].codigoatc.toString();
           var descatc = index[item].descatc.toString();
           Atc.updateOrCreate({
-            nroatc: nroatc,
-            codigoatc: codigoatc,
-            descatc: descatc
+            nro_atc: nroatc,
+            cod_atc: codigoatc,
+            des_catc: descatc
           },{
-            nroatc: nroatc,
-            codigoatc: codigoatc,
-            descatc: descatc
+            nro_atc: nroatc,
+            cod_atc: codigoatc,
+            des_catc: descatc
           }, function(){
             console.log("[INFO - Item created or updated on ATC]");
           });

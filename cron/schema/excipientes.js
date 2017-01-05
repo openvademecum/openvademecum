@@ -10,12 +10,15 @@ var Excipientes = Waterline.Collection.extend({
 
   // Attributes are basic pieces of information about a model
   attributes: {
-    codigoedo: {
+    cod_excipiente: {
       type:'integer',
       unique: true
     },
     edo: {
       type:'string'
+    },
+    prescripcion_for_far:{
+      model: 'prescripcion_for_far'
     }
   },
   updateOrCreate: function(criteria, values, cb){

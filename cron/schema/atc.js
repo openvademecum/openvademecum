@@ -10,15 +10,15 @@ var Atc = Waterline.Collection.extend({
 
   // Attributes are basic pieces of information about a model
   attributes: {
-    nroatc: {
+    nro_atc: {
       type:'integer',
       unique: true
     },
-    codigoatc: {
+    cod_atc: {
       type:'string',
       unique: true
     },
-    descatc: {
+    desc_atc: {
       type:'string',
       unique: true
     }
