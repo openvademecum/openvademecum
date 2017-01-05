@@ -18,7 +18,7 @@ var Ffarmaceutica = Waterline.Collection.extend({
       type:'string'
     },
     cod_forfar_simplificada: {
-      type:'integer'
+      model:'ffarmaceuticasimp'
     }
   },
   updateOrCreate: function(criteria, values, cb){
