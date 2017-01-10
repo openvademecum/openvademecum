@@ -15,7 +15,7 @@ const FFARMACEUTICASIMP = require('./schema/ffarmaceuticasimp.js');
 const FFARMACEUTICA = require('./schema/ffarmaceutica.js');
 const LABORATORIO = require('./schema/laboratorio.js');
 const PACTIVOS = require('./schema/pactivos.js');
-const SITRIESGO = require('./schema/sitriesgo.js');
+const SITREGISTRO = require('./schema/sitregistro.js');
 const UNICONT = require('./schema/unicont.js');
 const VADMON = require('./schema/vadmon.js');
 const PRESCRIPCION_ATC = require('./schema/prescripcion_atc.js');
@@ -40,7 +40,7 @@ waterline.loadCollection(FFARMACEUTICASIMP);
 waterline.loadCollection(FFARMACEUTICA);
 waterline.loadCollection(LABORATORIO);
 waterline.loadCollection(PACTIVOS);
-waterline.loadCollection(SITRIESGO);
+waterline.loadCollection(SITREGISTRO);
 waterline.loadCollection(UNICONT);
 waterline.loadCollection(VADMON);
 waterline.loadCollection(PRESCRIPCION_ATC);
@@ -62,7 +62,7 @@ if(pull){
     })
   })
 }else{
-  updateFfarmaceutica();
+  updatePrescripcion();
 }
 
 function updateATC(){
@@ -308,31 +308,201 @@ function updateLaboratorio(){
       return console.error(err);
     }
     var Laboratorio = ontology.collections.laboratorio;
-    //TODO: from here!
-
-    fs.readFile('data/DICCIONARIO_FORMA_FARMACEUTICA.xml', function(err, data) {
+    fs.readFile('data/DICCIONARIO_LABORATORIOS.xml', function(err, data) {
       parser.parseString(data, function (err, data) {
-        var index = data.aemps_prescripcion_formas_farmaceuticas.formasfarmaceuticas
+        var index = data.aemps_prescripcion_laboratorios.laboratorios
         for(var item in index){
-          var codigoformafarmaceutica = index[item].codigoformafarmaceutica.toString();
-          var formafarmaceutica = index[item].formafarmaceutica.toString();
-          var codigoformafarmaceuticasimplificada = index[item].codigoformafarmaceuticasimplificada.toString();
-          Ffarmaceutica.updateOrCreate({
-            cod_forfar: codigoformafarmaceutica,
-            forfar: formafarmaceutica,
-            cod_forfar_simplificada: codigoformafarmaceuticasimplificada
+          var codigolaboratorio = index[item].codigolaboratorio.toString();
+          var laboratorio = index[item].laboratorio.toString();
+          var direccion = index[item].direccion.toString();
+          var codigopostal = index[item].codigopostal || null;
+          var localidad = index[item].localidad || null;
+          Laboratorio.updateOrCreate({
+            codigolaboratorio: codigolaboratorio,
+            laboratorio: laboratorio,
+            direccion: direccion,
+            codigopostal: codigopostal,
+            localidad: localidad
           },{
-            cod_forfar: codigoformafarmaceutica,
-            forfar: formafarmaceutica,
-            cod_forfar_simplificada: codigoformafarmaceuticasimplificada
-
+            codigolaboratorio: codigolaboratorio,
+            laboratorio: laboratorio,
+            direccion: direccion,
+            codigopostal: codigopostal,
+            localidad: localidad
           }, function(){
-            console.log("[INFO - Item created or updated on Ffarmaceutica]");
+            console.log("[INFO - Item created or updated on Laboratorio]");
           });
         }
       });
     });
   });
+}
+
+function updatePActivos(){
+  waterline.initialize(WaterlineConfig, function (err, ontology) {
+    if (err) {
+      return console.error(err);
+    }
+    var PActivos = ontology.collections.pactivos;
+    fs.readFile('data/DICCIONARIO_PRINCIPIOS_ACTIVOS.xml', function(err, data) {
+      parser.parseString(data, function (err, data) {
+        var index = data.aemps_prescripcion_principios_activos.principiosactivos
+        for(var item in index){
+          var nroprincipioactivo = index[item].nroprincipioactivo.toString();
+          var codigoprincipioactivo = index[item].codigoprincipioactivo.toString();
+          var principioactivo = index[item].principioactivo.toString();
+          PActivos.updateOrCreate({
+            nro_principio_activo: nroprincipioactivo,
+            cod_principio_activo: codigoprincipioactivo,
+            principio_activo: principioactivo
+          },{
+            nro_principio_activo: nroprincipioactivo,
+            cod_principio_activo: codigoprincipioactivo,
+            principio_activo: principioactivo
+          }, function(){
+            console.log("[INFO - Item created or updated on PActivo]");
+          });
+        }
+      });
+    });
+  });
+}
+
+function updateSitRiesgo(){
+  waterline.initialize(WaterlineConfig, function (err, ontology) {
+    if (err) {
+      return console.error(err);
+    }
+    var SitRegistro = ontology.collections.sitregistro;
+    fs.readFile('data/DICCIONARIO_SITUACION_REGISTRO.xml', function(err, data) {
+      parser.parseString(data, function (err, data) {
+        var index = data.aemps_prescripcion_situacion_registro.situacionesregistro
+        for(var item in index){
+          var codigosituacionregistro = index[item].codigosituacionregistro.toString();
+          var situacionregistro = index[item].situacionregistro.toString();
+          SitRegistro.updateOrCreate({
+            codigosituacionregistro: codigosituacionregistro,
+            situacionregistro: situacionregistro
+          },{
+            codigosituacionregistro: codigosituacionregistro,
+            situacionregistro: situacionregistro
+          }, function(){
+            console.log("[INFO - Item created or updated on SitRegistro]");
+          });
+        }
+      });
+    });
+  });
+}
+
+function updatePActivos(){
+  waterline.initialize(WaterlineConfig, function (err, ontology) {
+    if (err) {
+      return console.error(err);
+    }
+    var PActivos = ontology.collections.pactivos;
+    fs.readFile('data/DICCIONARIO_PRINCIPIOS_ACTIVOS.xml', function(err, data) {
+      parser.parseString(data, function (err, data) {
+        var index = data.aemps_prescripcion_principios_activos.principiosactivos
+        for(var item in index){
+          var nroprincipioactivo = index[item].nroprincipioactivo.toString();
+          var codigoprincipioactivo = index[item].codigoprincipioactivo.toString();
+          var principioactivo = index[item].principioactivo.toString();
+          PActivos.updateOrCreate({
+            nro_principio_activo: nroprincipioactivo,
+            cod_principio_activo: codigoprincipioactivo,
+            principio_activo: principioactivo
+          },{
+            nro_principio_activo: nroprincipioactivo,
+            cod_principio_activo: codigoprincipioactivo,
+            principio_activo: principioactivo
+          }, function(){
+            console.log("[INFO - Item created or updated on PActivo]");
+          });
+        }
+      });
+    });
+  });
+}
+
+function updateUniCont(){
+  waterline.initialize(WaterlineConfig, function (err, ontology) {
+    if (err) {
+      return console.error(err);
+    }
+    var UniCont = ontology.collections.unicont;
+    fs.readFile('data/DICCIONARIO_UNIDAD_CONTENIDO.xml', function(err, data) {
+      parser.parseString(data, function (err, data) {
+        var index = data.aemps_prescripcion_unidad_contenido.unidadescontenido
+        for(var item in index){
+          var codigounidadcontenido = index[item].codigounidadcontenido.toString();
+          var unidadcontenido = index[item].unidadcontenido.toString();
+          UniCont.updateOrCreate({
+            codigounidadcontenido: codigounidadcontenido,
+            unidadcontenido: unidadcontenido
+          },{
+            codigounidadcontenido: codigounidadcontenido,
+            unidadcontenido: unidadcontenido
+          }, function(){
+            console.log("[INFO - Item created or updated on UniCont]");
+          });
+        }
+      });
+    });
+  });
+}
+
+function updateVAdmon(){
+  waterline.initialize(WaterlineConfig, function (err, ontology) {
+    if (err) {
+      return console.error(err);
+    }
+    var VAdmon = ontology.collections.vadmon;
+    fs.readFile('data/DICCIONARIO_VIAS_ADMINISTRACION.xml', function(err, data) {
+      parser.parseString(data, function (err, data) {
+        var index = data.aemps_prescripcion_vias_administracion.viasadministracion
+        for(var item in index){
+          var codigoviaadministracion = index[item].codigoviaadministracion.toString();
+          var viaadministracion = index[item].viaadministracion.toString();
+          VAdmon.updateOrCreate({
+            cod_via_admin: codigoviaadministracion,
+            via_admin: viaadministracion
+          },{
+            cod_via_admin: codigoviaadministracion,
+            via_admin: viaadministracion
+          }, function(){
+            console.log("[INFO - Item created or updated on VAdmon]");
+          });
+        }
+      });
+    });
+  });
+}
+
+function updatePrescripcion(){
+  waterline.initialize(WaterlineConfig, function (err, ontology) {
+    if (err) {
+      return console.error(err);
+    }
+    var Prescripcion = ontology.collections.prescripcion;
+    fs.readFile('data/Prescripcion.xml', function(err, data) {
+      parser.parseString(data, function (err, data) {
+        var index = data.aemps_prescripcion.prescription
+        for(var item in index){
+          // var codigoviaadministracion = index[item].codigoviaadministracion.toString();
+          // var viaadministracion = index[item].viaadministracion.toString();
+          Prescripcion.updateOrCreate(index[item],index[item], function(ko, ok){
+            if(ko){
+              console.log("[ERROR] - Prescripcion.updateOrCreate error: "+ko)
+            }else if(ok){
+              console.log("[INFO - Item created or updated on Prescripcion]");
+            }
+          });
+        }
+      });
+    });
+  });
+}
 
 
 function clean (){

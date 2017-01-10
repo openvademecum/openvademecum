@@ -2,7 +2,7 @@ const Waterline = require('waterline');
 var Sitriesgo = Waterline.Collection.extend({
 
   // Identity is a unique name for this model and must be in lower case
-  identity: 'sitriesgo',
+  identity: 'sitregistro',
 
   // Connection
   // A named connection which will be used to read/write to the datastore
