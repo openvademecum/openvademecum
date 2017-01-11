@@ -24,26 +24,30 @@ var Prescripcion = Waterline.Collection.extend({
     cod_dcp: {type:'integer'},
     cod_dcpf: {type:'integer'},
     des_dosific: {type:'string'},
-    cod_envase: {type:'integer'},
+    cod_envase: {
+      model:'envases'
+    },
     contenido: {type:'integer'},
-    unid_contenido: {type:'integer'},
+    unid_contenido: {
+      model:'unicont'
+    },
     nro_conte: {type:'string'},
-    sw_psicotropo: {type:'boolean'},
-    sw_estupefaciente: {type:'boolean'},
-    sw_afecta_conduccion: {type:'boolean'},
-    sw_triangulo_negro: {type:'boolean'},
+    sw_psicotropo: {type:'integer'},
+    sw_estupefaciente: {type:'integer'},
+    sw_afecta_conduccion: {type:'integer'},
+    sw_triangulo_negro: {type:'integer'},
     url_fictec: {type:'string'},
     url_prosp: {type:'string'},
-    sw_receta: {type:'boolean'},
-    sw_generico: {type:'boolean'},
-    sw_sustituible: {type:'boolean'},
-    sw_envase_clinico: {type:'boolean'},
-    sw_uso_hospitalario: {type:'boolean'},
-    sw_diagnostico_hospitalario: {type:'boolean'},
-    sw_tld: {type:'boolean'},
-    sw_especial_control_medico: {type:'boolean'},
-    sw_huerfano: {type:'boolean'},
-    sw_base_a_plantas: {type:'boolean'},
+    sw_receta: {type:'integer'},
+    sw_generico: {type:'integer'},
+    sw_sustituible: {type:'integer'},
+    sw_envase_clinico: {type:'integer'},
+    sw_uso_hospitalario: {type:'integer'},
+    sw_diagnostico_hospitalario: {type:'integer'},
+    sw_tld: {type:'integer'},
+    sw_especial_control_medico: {type:'integer'},
+    sw_huerfano: {type:'integer'},
+    sw_base_a_plantas: {type:'integer'},
     laboratorio_titular: {
       model: 'laboratorio'
     },
@@ -51,22 +55,27 @@ var Prescripcion = Waterline.Collection.extend({
       model: 'laboratorio'
     },
     fecha_autorizacion: {type:'date'},
-    sw_comercializado: {type:'boolean'},
+    sw_comercializado: {type:'integer'},
     fec_comer: {type:'date'},
-    cod_sitreg: {type:'boolean'},
-    cod_sitreg_presen: {type:'boolean'},
+    cod_sitreg: {
+      model:'sitregistro'
+    },
+    cod_sitreg_presen: {
+      model:'sitregistro'
+    },
     fecha_situacion_registro: {type:'date'},
     fec_sitreg_presen: {type:'date'},
-    sw_tiene_excipientes_decl_obligatoria: {type:'boolean'},
-    biosimilar: {type:'boolean'},
-    importacion_paralela: {type:'boolean'},
-    formasfarmaceuticas: {
-      model: 'prescripcion_for_far'
-    },
-    atc: {
-      collection: 'prescripcion_atc',
-      via: 'prescripcion'
-    }
+    sw_tiene_excipientes_decl_obligatoria: {type:'integer'},
+    biosimilar: {type:'integer'},
+    importacion_paralela: {type:'integer'}
+    //,
+    // formasfarmaceuticas: {
+    //   model: 'prescripcion_for_far'
+    // },
+    // atc: {
+    //   collection: 'prescripcion_atc',
+    //   via: 'prescripcion'
+    // }
   },
   updateOrCreate: function(criteria, values, cb){
     var self = this; // reference for use by callbacks

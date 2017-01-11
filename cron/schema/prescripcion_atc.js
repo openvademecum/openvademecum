@@ -10,8 +10,15 @@ var Prescripcion_atc = Waterline.Collection.extend({
 
   // Attributes are basic pieces of information about a model
   attributes: {
-    cod_atc: {
-      model:'atc'
+    cod_atc: {type:'string'},
+    interacciones_atc:{
+      collection: 'prescripcion_int_atc',
+      via: 'atc_interaccion'
+    },
+    desaconsejados_geriatria:{
+      collection: 'prescripcion_des_ger',
+      via: 'prescripcion_atc'
+
     },
     duplicidades: {
       collection: 'prescripcion_dup',

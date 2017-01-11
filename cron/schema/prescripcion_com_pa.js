@@ -10,9 +10,7 @@ var Prescripcion_com_pa = Waterline.Collection.extend({
 
   // Attributes are basic pieces of information about a model
   attributes: {
-    cod_principio_activo: {
-      model: 'pactivos'
-    },
+    cod_principio_activo: {type: 'integer'},
     orden_colacion: {type:'integer'},
     dosis_pa: {type:'integer'},
     unidad_dosis_pa: {type:'string'},
@@ -23,7 +21,8 @@ var Prescripcion_com_pa = Waterline.Collection.extend({
     dosis_prescripcion: {type:'string'},
     unidad_prescripcion: {type:'string'},
     prescripcion_for_far: {
-      model: 'prescripcion_for_far'
+      collection: 'prescripcion_for_far',
+      via: 'composicion_pa'
     }
   },
   updateOrCreate: function(criteria, values, cb){

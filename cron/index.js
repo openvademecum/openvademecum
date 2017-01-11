@@ -22,13 +22,15 @@ const PRESCRIPCION_ATC = require('./schema/prescripcion_atc.js');
 const PRESCRIPCION_COM_PA = require('./schema/prescripcion_com_pa.js');
 const PRESCRIPCION_DUP = require('./schema/prescripcion_dup.js');
 const PRESCRIPCION_FOR_FAR = require('./schema/prescripcion_for_far.js');
+const PRESCRIPCION_DES_GER = require('./schema/prescripcion_des_ger.js');
+const PRESCRIPCION_INT_ATC = require('./schema/prescripcion_int_atc.js');
 const PRESCRIPCION = require('./schema/prescripcion.js');
 const WaterlineConfig = require('./schema/_config.js');
 
 var pull = false;
 var now = Date.now();
 var waterline = new Waterline();
-var parser = new xml2js.Parser();
+var parser = new xml2js.Parser({explicitArray : false});
 
 waterline.loadCollection(ATC);
 waterline.loadCollection(DCP);
@@ -47,6 +49,8 @@ waterline.loadCollection(PRESCRIPCION_ATC);
 waterline.loadCollection(PRESCRIPCION_COM_PA);
 waterline.loadCollection(PRESCRIPCION_DUP);
 waterline.loadCollection(PRESCRIPCION_FOR_FAR);
+waterline.loadCollection(PRESCRIPCION_DES_GER);
+waterline.loadCollection(PRESCRIPCION_INT_ATC);
 waterline.loadCollection(PRESCRIPCION);
 
 if(pull){
@@ -200,10 +204,10 @@ function updateEnvases(){
           var codigoenvase = index[item].codigoenvase.toString();
           var envase = index[item].envase.toString();
           Envases.updateOrCreate({
-            codigoenvase: codigoenvase,
+            cod_envase: codigoenvase,
             envase: envase
           },{
-            codigoenvase: codigoenvase,
+            cod_envase: codigoenvase,
             envase: envase
           }, function(){
             console.log("[INFO - Item created or updated on Envase]");
@@ -368,7 +372,7 @@ function updatePActivos(){
   });
 }
 
-function updateSitRiesgo(){
+function updateSitRegistro(){
   waterline.initialize(WaterlineConfig, function (err, ontology) {
     if (err) {
       return console.error(err);
@@ -381,10 +385,10 @@ function updateSitRiesgo(){
           var codigosituacionregistro = index[item].codigosituacionregistro.toString();
           var situacionregistro = index[item].situacionregistro.toString();
           SitRegistro.updateOrCreate({
-            codigosituacionregistro: codigosituacionregistro,
+            cod_sitreg: codigosituacionregistro,
             situacionregistro: situacionregistro
           },{
-            codigosituacionregistro: codigosituacionregistro,
+            cod_sitreg: codigosituacionregistro,
             situacionregistro: situacionregistro
           }, function(){
             console.log("[INFO - Item created or updated on SitRegistro]");
@@ -438,10 +442,10 @@ function updateUniCont(){
           var codigounidadcontenido = index[item].codigounidadcontenido.toString();
           var unidadcontenido = index[item].unidadcontenido.toString();
           UniCont.updateOrCreate({
-            codigounidadcontenido: codigounidadcontenido,
+            unid_contenido: codigounidadcontenido,
             unidadcontenido: unidadcontenido
           },{
-            codigounidadcontenido: codigounidadcontenido,
+            unid_contenido: codigounidadcontenido,
             unidadcontenido: unidadcontenido
           }, function(){
             console.log("[INFO - Item created or updated on UniCont]");
@@ -487,13 +491,12 @@ function updatePrescripcion(){
     var Prescripcion = ontology.collections.prescripcion;
     fs.readFile('data/Prescripcion.xml', function(err, data) {
       parser.parseString(data, function (err, data) {
-        var index = data.aemps_prescripcion.prescription
+        var index = data.aemps_prescripcion.prescription;
         for(var item in index){
-          // var codigoviaadministracion = index[item].codigoviaadministracion.toString();
-          // var viaadministracion = index[item].viaadministracion.toString();
           Prescripcion.updateOrCreate(index[item],index[item], function(ko, ok){
             if(ko){
-              console.log("[ERROR] - Prescripcion.updateOrCreate error: "+ko)
+              console.log("[ERROR] - Prescripcion.updateOrCreate error: "+ko);
+              console.log("_DATA_: "+JSON.stringify(index[item]))
             }else if(ok){
               console.log("[INFO - Item created or updated on Prescripcion]");
             }
@@ -504,7 +507,22 @@ function updatePrescripcion(){
   });
 }
 
+function test(){
+  waterline.initialize(WaterlineConfig, function (err, ontology) {
+    if (err) {
+      return console.error(err);
+    }
+    var Prescripcion = ontology.collections.prescripcion;
 
+    Prescripcion.findOne({nro_definitivo: 66337}).populate('formasfarmaceuticas').exec(function(err, users) {
+      if(err){
+        console.log(err)
+      }
+      console.log(JSON.stringify(users));
+    });
+
+  });
+}
 function clean (){
   console.log('[INFO] - Unzipped to folder, timestamp: '+now);
   fs.unlink(now+'.zip', (err) => {

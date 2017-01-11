@@ -10,7 +10,7 @@ var Envases = Waterline.Collection.extend({
 
   // Attributes are basic pieces of information about a model
   attributes: {
-    codigoenvase: {
+    cod_envase: {
       type:'integer',
       unique: true
     },

@@ -10,7 +10,7 @@ var Unicont = Waterline.Collection.extend({
 
   // Attributes are basic pieces of information about a model
   attributes: {
-    codigounidadcontenido: {
+    unid_contenido: {
       type:'integer',
       unique: true
     },

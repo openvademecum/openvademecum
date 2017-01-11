@@ -10,7 +10,7 @@ var Sitriesgo = Waterline.Collection.extend({
 
   // Attributes are basic pieces of information about a model
   attributes: {
-    codigosituacionregistro: {
+    cod_sitreg: {
       type:'integer',
       unique: true
     },

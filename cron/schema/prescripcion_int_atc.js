@@ -1,8 +1,8 @@
 const Waterline = require('waterline');
-var Excipientes = Waterline.Collection.extend({
+var Prescripcion_int_atc = Waterline.Collection.extend({
 
   // Identity is a unique name for this model and must be in lower case
-  identity: 'excipientes',
+  identity: 'prescripcion_int_atc',
 
   // Connection
   // A named connection which will be used to read/write to the datastore
@@ -10,17 +10,15 @@ var Excipientes = Waterline.Collection.extend({
 
   // Attributes are basic pieces of information about a model
   attributes: {
-    cod_excipiente: {
-      type:'integer',
-      unique: true
-    },
-    edo: {
-      type:'string'
-    },
-    prescripcion_for_far:{
-      collection: 'prescripcion_for_far',
-      via: 'excipientes'
-    }
+    atc_interaccion: {type:'string'},
+    descripcion_atc_interaccion:{type: 'string'},
+    efecto_interaccion:{type: 'string'},
+    recomendacion_interaccion:{type: 'string'}
+    // prescripcion_atc: {
+    //   collection: 'prescripcion_atc',
+    //   via: 'interacciones_atc'
+    // }
+
   },
   updateOrCreate: function(criteria, values, cb){
     var self = this; // reference for use by callbacks
@@ -41,6 +39,7 @@ var Excipientes = Waterline.Collection.extend({
       }
     });
   }
+
 });
 
-module.exports = Excipientes;
+module.exports = Prescripcion_int_atc;
