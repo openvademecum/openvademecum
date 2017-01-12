@@ -16,10 +16,6 @@ var Excipientes = Waterline.Collection.extend({
     },
     edo: {
       type:'string'
-    },
-    prescripcion_for_far:{
-      collection: 'prescripcion_for_far',
-      via: 'excipientes'
     }
   },
   updateOrCreate: function(criteria, values, cb){

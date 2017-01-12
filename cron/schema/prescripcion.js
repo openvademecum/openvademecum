@@ -14,23 +14,16 @@ var Prescripcion = Waterline.Collection.extend({
       type:'integer',
       unique: true
     },
-    nro_definitivo: {
-      type:'integer',
-      unique: true
-    },
+    nro_definitivo: {type:'string'},
     des_nomco: {type:'string'},
     des_prese: {type:'string'},
     cod_dcsa: {type:'integer'},
     cod_dcp: {type:'integer'},
     cod_dcpf: {type:'integer'},
     des_dosific: {type:'string'},
-    cod_envase: {
-      model:'envases'
-    },
+    cod_envase: {type:'integer'},
     contenido: {type:'integer'},
-    unid_contenido: {
-      model:'unicont'
-    },
+    unid_contenido: {type:'integer'},
     nro_conte: {type:'string'},
     sw_psicotropo: {type:'integer'},
     sw_estupefaciente: {type:'integer'},
@@ -48,21 +41,13 @@ var Prescripcion = Waterline.Collection.extend({
     sw_especial_control_medico: {type:'integer'},
     sw_huerfano: {type:'integer'},
     sw_base_a_plantas: {type:'integer'},
-    laboratorio_titular: {
-      model: 'laboratorio'
-    },
-    laboratorio_comercializador: {
-      model: 'laboratorio'
-    },
+    laboratorio_titular: {type: 'integer'},
+    laboratorio_comercializador: {type: 'integer'},
     fecha_autorizacion: {type:'date'},
     sw_comercializado: {type:'integer'},
     fec_comer: {type:'date'},
-    cod_sitreg: {
-      model:'sitregistro'
-    },
-    cod_sitreg_presen: {
-      model:'sitregistro'
-    },
+    cod_sitreg: {type:'integer'},
+    cod_sitreg_presen: {type:'integer'},
     fecha_situacion_registro: {type:'date'},
     fec_sitreg_presen: {type:'date'},
     sw_tiene_excipientes_decl_obligatoria: {type:'integer'},

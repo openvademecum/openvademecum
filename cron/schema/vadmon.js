@@ -16,10 +16,6 @@ var Vadmon = Waterline.Collection.extend({
     },
     via_admin: {
       type:'string'
-    },
-    prescripcion_for_far:{
-      collection: 'prescripcion_for_far',
-      via: 'viasadministracion'
     }
   },
   updateOrCreate: function(criteria, values, cb){

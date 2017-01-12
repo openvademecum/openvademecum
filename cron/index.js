@@ -18,12 +18,12 @@ const PACTIVOS = require('./schema/pactivos.js');
 const SITREGISTRO = require('./schema/sitregistro.js');
 const UNICONT = require('./schema/unicont.js');
 const VADMON = require('./schema/vadmon.js');
-const PRESCRIPCION_ATC = require('./schema/prescripcion_atc.js');
-const PRESCRIPCION_COM_PA = require('./schema/prescripcion_com_pa.js');
-const PRESCRIPCION_DUP = require('./schema/prescripcion_dup.js');
-const PRESCRIPCION_FOR_FAR = require('./schema/prescripcion_for_far.js');
-const PRESCRIPCION_DES_GER = require('./schema/prescripcion_des_ger.js');
-const PRESCRIPCION_INT_ATC = require('./schema/prescripcion_int_atc.js');
+//const PRESCRIPCION_ATC = require('./schema/prescripcion_atc.js');
+//const PRESCRIPCION_COM_PA = require('./schema/prescripcion_com_pa.js');
+//const PRESCRIPCION_DUP = require('./schema/prescripcion_dup.js');
+//const PRESCRIPCION_FOR_FAR = require('./schema/prescripcion_for_far.js');
+//const PRESCRIPCION_DES_GER = require('./schema/prescripcion_des_ger.js');
+//const PRESCRIPCION_INT_ATC = require('./schema/prescripcion_int_atc.js');
 const PRESCRIPCION = require('./schema/prescripcion.js');
 const WaterlineConfig = require('./schema/_config.js');
 
@@ -45,12 +45,12 @@ waterline.loadCollection(PACTIVOS);
 waterline.loadCollection(SITREGISTRO);
 waterline.loadCollection(UNICONT);
 waterline.loadCollection(VADMON);
-waterline.loadCollection(PRESCRIPCION_ATC);
-waterline.loadCollection(PRESCRIPCION_COM_PA);
-waterline.loadCollection(PRESCRIPCION_DUP);
-waterline.loadCollection(PRESCRIPCION_FOR_FAR);
-waterline.loadCollection(PRESCRIPCION_DES_GER);
-waterline.loadCollection(PRESCRIPCION_INT_ATC);
+//waterline.loadCollection(PRESCRIPCION_ATC);
+//waterline.loadCollection(PRESCRIPCION_COM_PA);
+//waterline.loadCollection(PRESCRIPCION_DUP);
+//waterline.loadCollection(PRESCRIPCION_FOR_FAR);
+//waterline.loadCollection(PRESCRIPCION_DES_GER);
+//waterline.loadCollection(PRESCRIPCION_INT_ATC);
 waterline.loadCollection(PRESCRIPCION);
 
 if(pull){
@@ -66,7 +66,7 @@ if(pull){
     })
   })
 }else{
-  updatePrescripcion();
+  test();
 }
 
 function updateATC(){
@@ -490,9 +490,13 @@ function updatePrescripcion(){
     }
     var Prescripcion = ontology.collections.prescripcion;
     fs.readFile('data/Prescripcion.xml', function(err, data) {
+      console.log("[INFO] - Opening: Prescripcion.xml");
       parser.parseString(data, function (err, data) {
+        console.log("[INFO] - Parsing: Prescripcion.xml");
         var index = data.aemps_prescripcion.prescription;
+        console.log("[INFO] - Iterating: Prescripcion.xml");
         for(var item in index){
+          console.log("[INFO] - Sending element number: "+item+" out of: "+index.length);
           Prescripcion.updateOrCreate(index[item],index[item], function(ko, ok){
             if(ko){
               console.log("[ERROR] - Prescripcion.updateOrCreate error: "+ko);
@@ -513,12 +517,19 @@ function test(){
       return console.error(err);
     }
     var Prescripcion = ontology.collections.prescripcion;
+    var Laboratorio = ontology.collections.laboratorio;
 
-    Prescripcion.findOne({nro_definitivo: 66337}).populate('formasfarmaceuticas').exec(function(err, users) {
+    Prescripcion.findOne({cod_nacion: 600058}).exec(function(err, res) {
       if(err){
         console.log(err)
+      }if (res){
+        var labora = res.laboratorio_titular;
+        Laboratorio.findOne({codigolaboratorio: labora}).exec(function(err, res2){
+          res.laboratorio_titular=res2;
+          console.log(JSON.stringify(res));
+        })
+
       }
-      console.log(JSON.stringify(users));
     });
 
   });

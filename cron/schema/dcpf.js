@@ -21,7 +21,7 @@ var Dcpf = Waterline.Collection.extend({
       type:'string'
     },
     codigodcp: {
-      model:'dcp'
+      type:'integer'
     }
   },
   updateOrCreate: function(criteria, values, cb){
