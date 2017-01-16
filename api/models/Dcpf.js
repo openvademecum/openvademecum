@@ -1,5 +1,5 @@
 /**
- * Atc.js
+ * Dcpf.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
@@ -8,17 +8,18 @@
 module.exports = {
 
   attributes: {
-    nro_atc: {
+    codigodcpf: {
       type:'integer',
       unique: true
     },
-    cod_atc: {
-      type:'string',
-      unique: true
+    nombredcpf: {
+      type:'string'
     },
-    desc_atc: {
-      type:'string',
-      unique: true
+    nombrecortodcpf: {
+      type:'string'
+    },
+    codigodcp: {
+      type:'integer'
     }
   },
   updateOrCreate: function(criteria, values, cb){

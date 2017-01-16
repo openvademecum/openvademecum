@@ -1,5 +1,5 @@
 /**
- * Atc.js
+ * Laboratorio.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
@@ -8,17 +8,21 @@
 module.exports = {
 
   attributes: {
-    nro_atc: {
+    codigolaboratorio: {
       type:'integer',
       unique: true
     },
-    cod_atc: {
-      type:'string',
-      unique: true
+    laboratorio: {
+      type:'string'
     },
-    desc_atc: {
-      type:'string',
-      unique: true
+    direccion: {
+      type:'string'
+    },
+    codigopostal: {
+      type:'integer'
+    },
+    localidad: {
+      type:'string'
     }
   },
   updateOrCreate: function(criteria, values, cb){

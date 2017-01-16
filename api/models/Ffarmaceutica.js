@@ -1,5 +1,5 @@
 /**
- * Atc.js
+ * Ffarmaceutica.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
@@ -8,17 +8,15 @@
 module.exports = {
 
   attributes: {
-    nro_atc: {
+    cod_forfar: {
       type:'integer',
       unique: true
     },
-    cod_atc: {
-      type:'string',
-      unique: true
+    forfar: {
+      type:'string'
     },
-    desc_atc: {
-      type:'string',
-      unique: true
+    cod_forfar_simplificada: {
+      type:'integer'
     }
   },
   updateOrCreate: function(criteria, values, cb){

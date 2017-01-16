@@ -1,5 +1,5 @@
 /**
- * Atc.js
+ * Excipientes.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
@@ -8,17 +8,12 @@
 module.exports = {
 
   attributes: {
-    nro_atc: {
+    cod_excipiente: {
       type:'integer',
       unique: true
     },
-    cod_atc: {
-      type:'string',
-      unique: true
-    },
-    desc_atc: {
-      type:'string',
-      unique: true
+    edo: {
+      type:'string'
     }
   },
   updateOrCreate: function(criteria, values, cb){

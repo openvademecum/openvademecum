@@ -1,5 +1,5 @@
 /**
- * Atc.js
+ * Envases.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
@@ -8,17 +8,12 @@
 module.exports = {
 
   attributes: {
-    nro_atc: {
+    cod_envase: {
       type:'integer',
       unique: true
     },
-    cod_atc: {
-      type:'string',
-      unique: true
-    },
-    desc_atc: {
-      type:'string',
-      unique: true
+    envase: {
+      type:'string'
     }
   },
   updateOrCreate: function(criteria, values, cb){
