@@ -28,9 +28,9 @@ const PRESCRIPCION = require('./schema/prescripcion.js');
 const WaterlineConfig = require('./schema/_config.js');
 
 var pull = false;
-var now = Date.now();
+
 var waterline = new Waterline();
-var parser = new xml2js.Parser({explicitArray : false});
+
 
 waterline.loadCollection(ATC);
 waterline.loadCollection(DCP);
