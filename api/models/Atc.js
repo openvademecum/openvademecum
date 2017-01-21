@@ -37,6 +37,7 @@ module.exports = {
 
         var elemIsEqual=_.isMatch(values, result);
         if (!elemIsEqual) {
+          //TODO: Finish and remove sails.log
           sails.log.info("***** IS EQUAL: "+elemIsEqual);
           sails.log.info("***** IS EQUAL NEGATED: "+!elemIsEqual);
           sails.log.warn(">>>>>>>> NOT EQUAL ITEM: ");
