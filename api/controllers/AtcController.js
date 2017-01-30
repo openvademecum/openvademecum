@@ -9,9 +9,7 @@
 
 module.exports = {
   update: function(req, res){
-    atcutil.update().then(function(){sails.log.info('[CRON] - Finished updating ATC.')}).catch(function(err){sails.log.error('[ERROR] - '+err)})
-
+    atcUtil.update().then(function(){sails.log.info('[CRON] - Finished updating ATC.')}).catch(function(err){sails.log.error('[ERROR] - '+err)})
   }
-
 };
 
