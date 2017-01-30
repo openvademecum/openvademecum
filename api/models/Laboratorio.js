@@ -19,7 +19,7 @@ module.exports = {
       type:'string'
     },
     codigopostal: {
-      type:'integer'
+      type:'string'
     },
     localidad: {
       type:'string'

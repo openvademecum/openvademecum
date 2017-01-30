@@ -534,10 +534,3 @@ function test(){
 
   });
 }
-function clean (){
-  console.log('[INFO] - Unzipped to folder, timestamp: '+now);
-  fs.unlink(now+'.zip', (err) => {
-    if (err) throw err;
-    console.log('[INFO] - successfully cleaned zip file');
-  });
-}
