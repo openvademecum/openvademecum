@@ -23,6 +23,7 @@ module.exports = {
       unique: true
     }
   },
+  //TODO: This function is not going to be used in v0.1
   updateOrCreate: function (criteria, values, cb) {
     var self = this;
     if (!values) values = criteria.where ? criteria.where : criteria;
@@ -37,8 +38,6 @@ module.exports = {
 
         var elemIsEqual=_.isMatch(values, result);
         if (!elemIsEqual) {
-          //TODO: Finish and remove sails.log
-          //TODO: todo.
           sails.log.info("***** IS EQUAL: "+elemIsEqual);
           sails.log.info("***** IS EQUAL NEGATED: "+!elemIsEqual);
           sails.log.warn(">>>>>>>> NOT EQUAL ITEM: ");

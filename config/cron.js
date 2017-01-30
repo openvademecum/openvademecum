@@ -35,155 +35,133 @@ module.exports.cron = {
   updateATC: {
     schedule: '* * * * *',
     onTick: function () {
-      sails.log.info('[CRON] - Updating ATC.');
-      fs.readFile('data/DICCIONARIO_ATC.xml', function (err, data) {
-        parser.parseString(data, function (err, data) {
-          var index = data.aemps_prescripcion_atc.atc;
-          for (var item in index) {
-            if (index.hasOwnProperty(item)) {
-              var nroatc = index[item].nroatc.toString();
-              var codigoatc = index[item].codigoatc.toString();
-              var descatc = index[item].descatc.toString();
-              Atc.updateOrCreate({
-                nro_atc: nroatc,
-                cod_atc: codigoatc,
-                des_catc: descatc
-              }, {
-                nro_atc: nroatc,
-                cod_atc: codigoatc,
-                des_catc: descatc
-              });
-            }
-          }
-          sails.log.info("[CRON] - Finishing updating ATC.");
-        });
-      });
+      atcutil.update().then(function(){sails.log.info('[CRON] - Finished updating ATC.')}).catch(function(err){sails.log.error('[ERROR] - '+err)});
     },
-    start: true, // Start task immediately
+    start: false, // Start task immediately
     timezone: 'Europe/Madrid', // Custom timezone
     context: undefined // Custom context for onTick callback
 
   },
   /*updateATC: {
-    schedule: '* * * * *',
-    onTick: function () {
-      sails.log.info('[CRON] - Pulling new data from AEMPS');
-    },
-    start: false, // Start task immediately
-    timezone: 'Europe/Madrid', // Custom timezone
-    context: undefined // Custom context for onTick callback
+   schedule: '* * * * *',
+   onTick: function () {
+   sails.log.info('[CRON] - Pulling new data from AEMPS');
+   },
+   start: false, // Start task immediately
+   timezone: 'Europe/Madrid', // Custom timezone
+   context: undefined // Custom context for onTick callback
 
-  },
-  updateATC: {
-    schedule: '* * * * *',
-    onTick: function () {
-      sails.log.info('[CRON] - Pulling new data from AEMPS');
-    },
-    start: false, // Start task immediately
-    timezone: 'Europe/Madrid', // Custom timezone
-    context: undefined // Custom context for onTick callback
+   },
+   updateATC: {
+   schedule: '* * * * *',
+   onTick: function () {
+   sails.log.info('[CRON] - Pulling new data from AEMPS');
+   },
+   start: false, // Start task immediately
+   timezone: 'Europe/Madrid', // Custom timezone
+   context: undefined // Custom context for onTick callback
 
-  },
-  updateATC: {
-    schedule: '* * * * *',
-    onTick: function () {
-      sails.log.info('[CRON] - Pulling new data from AEMPS');
-    },
-    start: false, // Start task immediately
-    timezone: 'Europe/Madrid', // Custom timezone
-    context: undefined // Custom context for onTick callback
+   },
+   updateATC: {
+   schedule: '* * * * *',
+   onTick: function () {
+   sails.log.info('[CRON] - Pulling new data from AEMPS');
+   },
+   start: false, // Start task immediately
+   timezone: 'Europe/Madrid', // Custom timezone
+   context: undefined // Custom context for onTick callback
 
-  },
-  updateATC: {
-    schedule: '* * * * *',
-    onTick: function () {
-      sails.log.info('[CRON] - Pulling new data from AEMPS');
-    },
-    start: false, // Start task immediately
-    timezone: 'Europe/Madrid', // Custom timezone
-    context: undefined // Custom context for onTick callback
+   },
+   updateATC: {
+   schedule: '* * * * *',
+   onTick: function () {
+   sails.log.info('[CRON] - Pulling new data from AEMPS');
+   },
+   start: false, // Start task immediately
+   timezone: 'Europe/Madrid', // Custom timezone
+   context: undefined // Custom context for onTick callback
 
-  },
-  updateATC: {
-    schedule: '* * * * *',
-    onTick: function () {
-      sails.log.info('[CRON] - Pulling new data from AEMPS');
-    },
-    start: false, // Start task immediately
-    timezone: 'Europe/Madrid', // Custom timezone
-    context: undefined // Custom context for onTick callback
+   },
+   updateATC: {
+   schedule: '* * * * *',
+   onTick: function () {
+   sails.log.info('[CRON] - Pulling new data from AEMPS');
+   },
+   start: false, // Start task immediately
+   timezone: 'Europe/Madrid', // Custom timezone
+   context: undefined // Custom context for onTick callback
 
-  },
-  updateATC: {
-    schedule: '* * * * *',
-    onTick: function () {
-      sails.log.info('[CRON] - Pulling new data from AEMPS');
-    },
-    start: false, // Start task immediately
-    timezone: 'Europe/Madrid', // Custom timezone
-    context: undefined // Custom context for onTick callback
+   },
+   updateATC: {
+   schedule: '* * * * *',
+   onTick: function () {
+   sails.log.info('[CRON] - Pulling new data from AEMPS');
+   },
+   start: false, // Start task immediately
+   timezone: 'Europe/Madrid', // Custom timezone
+   context: undefined // Custom context for onTick callback
 
-  },
-  updateATC: {
-    schedule: '* * * * *',
-    onTick: function () {
-      sails.log.info('[CRON] - Pulling new data from AEMPS');
-    },
-    start: false, // Start task immediately
-    timezone: 'Europe/Madrid', // Custom timezone
-    context: undefined // Custom context for onTick callback
+   },
+   updateATC: {
+   schedule: '* * * * *',
+   onTick: function () {
+   sails.log.info('[CRON] - Pulling new data from AEMPS');
+   },
+   start: false, // Start task immediately
+   timezone: 'Europe/Madrid', // Custom timezone
+   context: undefined // Custom context for onTick callback
 
-  },
-  updateATC: {
-    schedule: '* * * * *',
-    onTick: function () {
-      sails.log.info('[CRON] - Pulling new data from AEMPS');
-    },
-    start: false, // Start task immediately
-    timezone: 'Europe/Madrid', // Custom timezone
-    context: undefined // Custom context for onTick callback
+   },
+   updateATC: {
+   schedule: '* * * * *',
+   onTick: function () {
+   sails.log.info('[CRON] - Pulling new data from AEMPS');
+   },
+   start: false, // Start task immediately
+   timezone: 'Europe/Madrid', // Custom timezone
+   context: undefined // Custom context for onTick callback
 
-  },
-  updateATC: {
-    schedule: '* * * * *',
-    onTick: function () {
-      sails.log.info('[CRON] - Pulling new data from AEMPS');
-    },
-    start: false, // Start task immediately
-    timezone: 'Europe/Madrid', // Custom timezone
-    context: undefined // Custom context for onTick callback
+   },
+   updateATC: {
+   schedule: '* * * * *',
+   onTick: function () {
+   sails.log.info('[CRON] - Pulling new data from AEMPS');
+   },
+   start: false, // Start task immediately
+   timezone: 'Europe/Madrid', // Custom timezone
+   context: undefined // Custom context for onTick callback
 
-  },
-  updateATC: {
-    schedule: '* * * * *',
-    onTick: function () {
-      sails.log.info('[CRON] - Pulling new data from AEMPS');
-    },
-    start: false, // Start task immediately
-    timezone: 'Europe/Madrid', // Custom timezone
-    context: undefined // Custom context for onTick callback
+   },
+   updateATC: {
+   schedule: '* * * * *',
+   onTick: function () {
+   sails.log.info('[CRON] - Pulling new data from AEMPS');
+   },
+   start: false, // Start task immediately
+   timezone: 'Europe/Madrid', // Custom timezone
+   context: undefined // Custom context for onTick callback
 
-  },
-  updateATC: {
-    schedule: '* * * * *',
-    onTick: function () {
-      sails.log.info('[CRON] - Pulling new data from AEMPS');
-    },
-    start: false, // Start task immediately
-    timezone: 'Europe/Madrid', // Custom timezone
-    context: undefined // Custom context for onTick callback
+   },
+   updateATC: {
+   schedule: '* * * * *',
+   onTick: function () {
+   sails.log.info('[CRON] - Pulling new data from AEMPS');
+   },
+   start: false, // Start task immediately
+   timezone: 'Europe/Madrid', // Custom timezone
+   context: undefined // Custom context for onTick callback
 
-  },
-  updateATC: {
-    schedule: '* * * * *',
-    onTick: function () {
-      sails.log.info('[CRON] - Pulling new data from AEMPS');
-    },
-    start: false, // Start task immediately
-    timezone: 'Europe/Madrid', // Custom timezone
-    context: undefined // Custom context for onTick callback
+   },
+   updateATC: {
+   schedule: '* * * * *',
+   onTick: function () {
+   sails.log.info('[CRON] - Pulling new data from AEMPS');
+   },
+   start: false, // Start task immediately
+   timezone: 'Europe/Madrid', // Custom timezone
+   context: undefined // Custom context for onTick callback
 
-  }*/
+   }*/
 
 
 };
