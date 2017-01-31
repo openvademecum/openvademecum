@@ -8,9 +8,7 @@
  */
 
 const fs = require('fs');
-const xml2js = require('xml2js');
-
-var parser = new xml2js.Parser({explicitArray: false});
+const XmlStream = require('xml-stream');
 
 module.exports.update = function () {
 
@@ -22,31 +20,46 @@ module.exports.update = function () {
         reject();
       }
       else {
-        Vadmon.count().exec(function (error, count) {
-          sails.log.info("[CRON] - Found " + count + " items in Vadmon");
-          sails.log.info('[CRON] - Updating Vadmon.');
-          fs.readFile('data/DICCIONARIO_VIAS_ADMINISTRACION.xml', function (err, data) {
-            parser.parseString(data, function (err, data) {
-              var index = data.aemps_prescripcion_vias_administracion.viasadministracion;
-              for (var item in index) {
-                if (index.hasOwnProperty(item)) {
-                  var codigoviaadministracion = index[item].codigoviaadministracion.toString();
-                  var viaadministracion = index[item].viaadministracion.toString();
-                  Vadmon.create({
-                    cod_via_admin: codigoviaadministracion,
-                    via_admin: viaadministracion
-                  }).exec(function (err, data) {
-                    if (err) reject(err);
-                    else {
-                      count++;
-                      if (count == index.length) resolve();
-                    }
-                  })
-                }
-              }
-            })
+        sails.log.info('[CRON] - Updating Vadmon.');
+        var stream = fs.createReadStream('data/DICCIONARIO_VIAS_ADMINISTRACION.xml');
+        var xml = new XmlStream(stream);
+        xml.collect('viasadministracion');
+        xml.on('endElement: viasadministracion', function (item) {
+          xml.pause();
+          Vadmon.create(item).exec(function (err, data) {
+            if (err) reject(err);
+            else {
+              xml.resume();
+            }
           })
         });
+        xml.on('end', function () {
+          sails.log.info("[CRON] - Finished updating Vadmon.");
+          resolve();
+        });
+
+
+        // fs.readFile('data/DICCIONARIO_VIAS_ADMINISTRACION.xml', function (err, data) {
+        //   parser.parseString(data, function (err, data) {
+        //     var index = data.aemps_prescripcion_vias_administracion.viasadministracion;
+        //     for (var item in index) {
+        //       if (index.hasOwnProperty(item)) {
+        //         var codigoviaadministracion = index[item].codigoviaadministracion.toString();
+        //         var viaadministracion = index[item].viaadministracion.toString();
+        //         Vadmon.create({
+        //           cod_via_admin: codigoviaadministracion,
+        //           via_admin: viaadministracion
+        //         }).exec(function (err, data) {
+        //           if (err) reject(err);
+        //           else {
+        //             count++;
+        //             if (count == index.length) resolve();
+        //           }
+        //         })
+        //       }
+        //     }
+        //   })
+        // })
       }
     })
   });

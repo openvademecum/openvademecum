@@ -8,9 +8,7 @@
  */
 
 const fs = require('fs');
-const xml2js = require('xml2js');
-
-var parser = new xml2js.Parser({explicitArray: false});
+const XmlStream = require('xml-stream');
 
 module.exports.update = function () {
 
@@ -22,32 +20,49 @@ module.exports.update = function () {
         reject();
       }
       else {
-        Excipientes.count().exec(function (error, count) {
-          sails.log.info("[CRON] - Found " + count + " items in Excipientes");
-          sails.log.info('[CRON] - Updating Excipientes.');
-          fs.readFile('data/DICCIONARIO_EXCIPIENTES_DECL_OBLIGATORIA.xml', function (err, data) {
-            parser.parseString(data, function (err, data) {
-              var index = data.aemps_prescripcion_excipientes.excipientes;
-              var count = 0;
-              for (var item in index) {
-                if (index.hasOwnProperty(item)) {
-                  var codigoedo = index[item].codigoedo.toString();
-                  var edo = index[item].edo.toString();
-                  Excipientes.create({
-                    cod_excipiente: codigoedo,
-                    edo: edo
-                  }).exec(function (err, data) {
-                    if (err) reject(err);
-                    else {
-                      count++;
-                      if (count == index.length) resolve();
-                    }
-                  })
-                }
-              }
-            })
+        sails.log.info('[CRON] - Updating Excipientes.');
+        var stream = fs.createReadStream('data/DICCIONARIO_EXCIPIENTES_DECL_OBLIGATORIA.xml');
+        var xml = new XmlStream(stream);
+        xml.collect('excipientes');
+        xml.on('endElement: excipientes', function (item) {
+          xml.pause();
+          Excipientes.create(item).exec(function (err, data) {
+            if (err) reject(err);
+            else {
+              xml.resume();
+            }
           })
         });
+        xml.on('end', function () {
+          sails.log.info("[CRON] - Finished updating Excipientes.");
+          resolve();
+        });
+
+
+
+
+        // fs.readFile('data/DICCIONARIO_EXCIPIENTES_DECL_OBLIGATORIA.xml', function (err, data) {
+        //   parser.parseString(data, function (err, data) {
+        //     var index = data.aemps_prescripcion_excipientes.excipientes;
+        //     var count = 0;
+        //     for (var item in index) {
+        //       if (index.hasOwnProperty(item)) {
+        //         var codigoedo = index[item].codigoedo.toString();
+        //         var edo = index[item].edo.toString();
+        //         Excipientes.create({
+        //           cod_excipiente: codigoedo,
+        //           edo: edo
+        //         }).exec(function (err, data) {
+        //           if (err) reject(err);
+        //           else {
+        //             count++;
+        //             if (count == index.length) resolve();
+        //           }
+        //         })
+        //       }
+        //     }
+        //   })
+        // })
       }
     })
   });

@@ -8,7 +8,6 @@
  */
 
 const fs = require('fs');
-const xml2js = require('xml2js');
 const XmlStream = require('xml-stream');
 
 module.exports.update = function () {
