@@ -134,3 +134,4 @@ config/local.js
 bower_components
 .tmp
 dump.rdb
+data/*.xml
