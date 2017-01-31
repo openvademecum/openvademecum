@@ -6,8 +6,6 @@
  */
 
 module.exports = {
-  update: function(req, res){
-    envasesUtil.update().then(function(){sails.log.info('[CRON] - Finished updating Envases.')}).catch(function(err){sails.log.error('[ERROR] - '+err)})
-  }
+
 };
 
