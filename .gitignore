@@ -135,3 +135,4 @@ bower_components
 .tmp
 dump.rdb
 data/*.xml
+data/*json
