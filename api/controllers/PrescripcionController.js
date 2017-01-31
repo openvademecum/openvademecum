@@ -6,9 +6,6 @@
  */
 
 module.exports = {
-  update : function(req, res){
-    pullUtil.pull();
-  }
 
 };
 
