@@ -29,6 +29,7 @@ module.exports.update = function () {
           Prescripcion.create(item).exec(function (err, data) {
             if (err) reject(err);
             else {
+              global.gc();
               xml.resume();
             }
           })

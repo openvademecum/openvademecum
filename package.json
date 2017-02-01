@@ -21,7 +21,7 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node --expose-gc app.js"
+    "start": "node --expose-gc --max_old_space_size=400 app.js"
   },
   "main": "app.js",
   "repository": {
