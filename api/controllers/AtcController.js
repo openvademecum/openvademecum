@@ -8,6 +8,10 @@
 
 
 module.exports = {
+  test: function(req, res){
+    res.ok();
+    atcUtil.update();
+  }
 
 };
 
