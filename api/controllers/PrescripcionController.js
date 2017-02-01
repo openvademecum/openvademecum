@@ -11,6 +11,7 @@ const nodemailer = require('@nodemailer/pro');
 const request = require('request');
 const unzip = require('unzip');
 const fstream = require('fstream');
+var now = Date.now();
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
