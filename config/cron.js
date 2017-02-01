@@ -25,20 +25,35 @@ module.exports.cron = {
     schedule: '0 * * * *',
     onTick: function () {
       pullUtil.pull().then(function () {
+        global.gc();
         atcUtil.update().then(function () {
+          global.gc();
           dcpUtil.update().then(function () {
+            global.gc();
             dcpfUtil.update().then(function () {
+              global.gc();
               dcsaUtil.update().then(function () {
+                global.gc();
                 envasesUtil.update().then(function () {
+                  global.gc();
                   excipientesUtil.update().then(function () {
+                    global.gc();
                     ffarmaceuticasimpUtil.update().then(function () {
+                      global.gc();
                       ffarmaceuticaUtil.update().then(function () {
+                        global.gc();
                         laboratorioUtil.update().then(function () {
+                          global.gc();
                           pactivosUtil.update().then(function () {
+                            global.gc();
                             sitregistroUtil.update().then(function () {
+                              global.gc();
                               unicontUtil.update().then(function () {
+                                global.gc();
                                 vadmonUtil.update().then(function () {
+                                  global.gc();
                                   prescripcionUtil.update().then(function () {
+                                    global.gc();
                                     sendOkMail();
                                   }).catch(function (err) {sendErrorMail(err)});
                                 }).catch(function (err) {sendErrorMail(err)});
@@ -56,7 +71,7 @@ module.exports.cron = {
         }).catch(function (err) {sendErrorMail(err)});
       }).catch(function (err) {sendErrorMail(err)});
     },
-    start: true,
+    start: false,
     timezone: 'Europe/Madrid',
     context: undefined
   }
