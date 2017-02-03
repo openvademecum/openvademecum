@@ -27,7 +27,10 @@ module.exports.update = function () {
       ]).toArray(function (err, results) {
         if (err) reject(err);
         else if (ids) {
-          if (results.hasOwnProperty('ids')) ids = results[0].ids;
+
+          if (results[0].hasOwnProperty('ids')) ids = results[0].ids;
+          sails.log.info("# # IDS raw: > "+results[0].ids.length);
+          sails.log.info("# # IDS: > "+ids.length);
         }
 
         //Create or update of all entries on xml
@@ -39,6 +42,7 @@ module.exports.update = function () {
           var nroatc = item.nroatc;
           delete item.nroatc;
           item._id = nroatc;
+          allIds.push(item._id);
 
           Atc.native(function (err, collection) {
             if (err) reject(err);
@@ -47,7 +51,6 @@ module.exports.update = function () {
               {$set: item},
               {upsert: true}, function (err, results) {
                 results = JSON.parse(results);
-                allIds.push(item._id);
                 if (err) reject(err);
                 if (results.hasOwnProperty('upserted')) {
                   //Item inserted
@@ -60,83 +63,34 @@ module.exports.update = function () {
               })
           });
         });
-        xml.on('end', function () {
-          sails.log.info("[CRON] - Finished updating ATC.");
-          sails.log.info("[CRON] - Items inserted: " + insertedIds.length);
-          sails.log.info("[CRON] - Items updated: " + updatedIds.length);
-
+        xml.on('endElement: aemps_prescripcion_atc', function () {
           //Compare new IDS with old ones.
           var deletedIds = _.difference(ids, allIds);
+          sails.log.info("[CRON] - Finished updating ATC.");
+          sails.log.info("[CRON] - # items inserted: " + insertedIds.length);
+          sails.log.info("[CRON] - # items updated: " + updatedIds.length);
+          sails.log.info("[CRON] - # items to delete: " + deletedIds.length);
+          sails.log.info("[CRON] - # ids in database: "+ids.length);
+          sails.log.info("[CRON] - # ids in document: "+allIds.length);
           sails.log.info("[CRON] - Items to delete: " + deletedIds.toString());
 
-          //TODO: Delete ids which not included.
+          //Delete ids not included.
+          Atc.native(function (err, collection){
+            if(err) reject(err);
+            deletedIds.forEach(function (entry){
+              collection.deleteOne({_id: entry}, function(err, results){
+                sails.log.info("[CRON] - Deleted item: "+entry);
+                sails.log.info("[CRON] - Deleted item results: "+JSON.stringify(results));
+              })
+            })
+
+          });
+
+
+
           resolve();
         });
-
-
       })
     });
-
   });
-
-  // return new Promise(function (resolve, reject) {
-  //   sails.log.info('[CRON] - Destroying ATC Collection.');
-  //   Atc.destroy().exec(function (err) {
-  //     if (err) {
-  //       sails.log.error("[CRON] - Error while destroying ATC.");
-  //       reject();
-  //     }
-  //     else {
-  //       sails.log.info('[CRON] - Updating ATC.');
-  //       var stream = fs.createReadStream('data/DICCIONARIO_ATC.xml');
-  //       var xml = new XmlStream(stream);
-  //       xml.collect('atc');
-  //       xml.on('endElement: atc', function (item) {
-  //         xml.pause();
-  //         item.id = item.nroatc;
-  //         sails.log.info("ITEM : "+JSON.stringify(item));
-  //         Atc.create(item).exec(function (err, data) {
-  //           if (err) reject(err);
-  //           else {
-  //             xml.resume();
-  //           }
-  //         })
-  //       });
-  //       xml.on('end', function () {
-  //         sails.log.info("[CRON] - Finished updating ATC.");
-  //         resolve();
-  //       });
-  //     }
-  //   })
-  // });
-  //
-  //
-  //       // fs.readFile('data/DICCIONARIO_ATC.xml', function (err, data) {
-  //       //   parser.parseString(data, function (err, data) {
-  //       //     var index = data.aemps_prescripcion_atc.atc;
-  //       //     var count = 0;
-  //       //     for (var item in index) {
-  //       //       if (index.hasOwnProperty(item)) {
-  //       //         var nroatc = index[item].nroatc.toString();
-  //       //         var codigoatc = index[item].codigoatc.toString();
-  //       //         var descatc = index[item].descatc.toString();
-  //       //         Atc.create({
-  //       //           nro_atc: nroatc,
-  //       //           cod_atc: codigoatc,
-  //       //           des_catc: descatc
-  //       //         }).exec(function (err, data) {
-  //       //           if (err) reject(err);
-  //       //           else {
-  //       //             count++;
-  //       //             if (count == index.length) resolve();
-  //       //           }
-  //       //         })
-  //       //       }
-  //       //     }
-  //       //   })
-  //       // })
-  //
-  //     }
-  //   })
-  // });
 };
