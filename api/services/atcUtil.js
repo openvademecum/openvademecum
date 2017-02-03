@@ -9,10 +9,16 @@
 
 const fs = require('fs');
 const XmlStream = require('xml-stream');
+const _ = require('lodash');
 
 module.exports.update = function () {
   return new Promise(function (resolve, reject) {
-    //TODO: Get all Collection IDs
+    var insertedIds = [];
+    var updatedIds = [];
+    var allIds = [];
+    var ids = [];
+
+    //Get all Collection IDs
     Atc.native(function (err, collection) {
       if (err) reject(err);
 
@@ -21,55 +27,53 @@ module.exports.update = function () {
       ]).toArray(function (err, results) {
         if (err) reject(err);
         else if (ids) {
-          var ids = results[0].ids;
+          if (results.hasOwnProperty('ids')) ids = results[0].ids;
         }
 
-        //TODO: Create or update of all entries on xml
+        //Create or update of all entries on xml
         var stream = fs.createReadStream('data/DICCIONARIO_ATC.xml');
         var xml = new XmlStream(stream);
         xml.collect('atc');
-        xml.on('endElement: atc', function (res) {
+        xml.on('endElement: atc', function (item) {
           xml.pause();
-          res._id = res.nroatc;
+          var nroatc = item.nroatc;
+          delete item.nroatc;
+          item._id = nroatc;
 
-
-
-          var item = res;
-          var aux = item;
-
-
-
-
-          sails.log.info("AUXITEMBEFORE: "+JSON.stringify(aux));
-
-          delete item['nroatc'];
-
-          sails.log.info("AUXITEM: "+JSON.stringify(aux));
-
-
-
-          sails.log.info("ITEMAUX: "+item);
           Atc.native(function (err, collection) {
             if (err) reject(err);
             collection.updateOne(
-              {nroatc: aux.nroatc},
+              {nroatc: nroatc},
               {$set: item},
               {upsert: true}, function (err, results) {
+                results = JSON.parse(results);
+                allIds.push(item._id);
                 if (err) reject(err);
-                sails.log.info("RESULTS: " + JSON.stringify(results));
-                //xml.resume();
+                if (results.hasOwnProperty('upserted')) {
+                  //Item inserted
+                  insertedIds.push(results.upserted[0]._id);
+                } else if (results['nModified'] == 1) {
+                  //Item modified
+                  updatedIds.push(item._id);
+                }
+                xml.resume();
               })
           });
         });
         xml.on('end', function () {
           sails.log.info("[CRON] - Finished updating ATC.");
+          sails.log.info("[CRON] - Items inserted: " + insertedIds.length);
+          sails.log.info("[CRON] - Items updated: " + updatedIds.length);
+
+          //Compare new IDS with old ones.
+          var deletedIds = _.difference(ids, allIds);
+          sails.log.info("[CRON] - Items to delete: " + deletedIds.toString());
+
+          //TODO: Delete ids which not included.
           resolve();
         });
 
 
-        //TODO: Compare new IDS with old ones.
-
-        //TODO: Delete ids which not included.
       })
     });
 

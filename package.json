@@ -8,6 +8,7 @@
     "@nodemailer/pro": "^1.0.0",
     "include-all": "^1.0.0",
     "jsonfile": "^2.4.0",
+    "lodash": "^4.17.4",
     "rc": "1.0.1",
     "request": "^2.79.0",
     "sails": "~0.12.11",
