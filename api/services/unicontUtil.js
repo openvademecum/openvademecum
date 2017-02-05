@@ -16,8 +16,8 @@ const XmlStream = require('xml-stream');
 
 const itemName = 'unidadescontenido';
 const modelName = 'unicont';
-const itemIdName = 'unidadescontenido';
-const xmlFile = 'data/DICCIONARIO_UNICAD_CONTENIDO.xml';
+const itemIdName = 'codigounidadcontenido';
+const xmlFile = 'data/DICCIONARIO_UNIDAD_CONTENIDO.xml';
 const endCollection = 'aemps_prescripcion_unidad_contenido';
 
 /************************END*****************************/
@@ -36,6 +36,7 @@ module.exports.update = function () {
 
     //Get all Collection IDs
     Unicont.native(function (err, collection) {
+
       if (err) reject(err);
       collection.aggregate([{$group: {_id: null, ids: {$addToSet: "$_id"}}}]).toArray(function (err, results) {
         if (err) reject(err);
@@ -56,13 +57,10 @@ module.exports.update = function () {
 
           Unicont.findOne({_id: item._id}).exec(function (err, oldItem) {
             if (err) reject(err);
-
             Unicont.native(function (err, collection) {
               if (err) reject(err);
-
               collection.updateOne({codigounidadcontenido: id}, {$set: item}, {upsert: true}, function (err, results) {
                 if (err) reject(err);
-
                 results = JSON.parse(results);
                 if (results.hasOwnProperty('upserted')) {
                   //Item inserted
