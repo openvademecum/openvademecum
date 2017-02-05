@@ -34,7 +34,7 @@ module.exports.update = function () {
     sails.log.info("[CRON] - [DCPF] - Updating DCPF...");
 
 
-    //Get all Collection IDs
+    //Get all Collection IDs.
     Dcpf.native(function (err, collection) {
       if (err) reject(err);
       collection.aggregate([{$group: {_id: null, ids: {$addToSet: "$_id"}}}]).toArray(function (err, results) {
