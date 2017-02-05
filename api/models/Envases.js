@@ -13,7 +13,7 @@ module.exports = {
       unique: true,
       primaryKey: true
     },
-    cod_envase: {
+    codigoenvase: {
       type:'integer',
       unique: true
     },
