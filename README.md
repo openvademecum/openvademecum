@@ -1,2 +1,2 @@
-# openvademecum
-Open Vademecum Project
+# Open Vademecum
+Open source drug information API.
