@@ -10,11 +10,9 @@
 module.exports = {
   test: function(req, res){
     res.ok();
-    atcUtil.update(function(err, res){
+    dcpfUtil.update(function(err, res){
       if (err)  sails.log.error("[ATC] - Error while updating ATC");
-      else if (res){
-        sails.log.info("[ATC] - Finished updating ATC.");
-      }
+      sails.log.info("[ATC] - Finished updating ATC.");
     })
   }
 

@@ -94,10 +94,7 @@ module.exports.update = function () {
                 } else xml.resume();
               })
             });
-
           });
-
-
         });
         xml.on('endElement: ' + endCollection, function () {
           //Compare new IDS with old ones.
