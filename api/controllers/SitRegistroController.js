@@ -6,8 +6,6 @@
  */
 
 module.exports = {
-  update: function(req, res){
-    sitregistroUtil.update().then(function(){sails.log.info('[CRON] - Finished updating Sitregistro.')}).catch(function(err){sails.log.error('[ERROR] - '+err)})
-  }
+
 };
 

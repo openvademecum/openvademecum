@@ -8,9 +8,7 @@
  */
 
 const fs = require('fs');
-const xml2js = require('xml2js');
-
-var parser = new xml2js.Parser({explicitArray: false});
+const XmlStream = require('xml-stream');
 
 module.exports.update = function () {
 
@@ -22,32 +20,48 @@ module.exports.update = function () {
         reject();
       }
       else {
-        Ffarmaceuticasimp.count().exec(function (error, count) {
-          sails.log.info("[CRON] - Found " + count + " items in Ffarmaceuticasimp");
-          sails.log.info('[CRON] - Updating Ffarmaceuticasimp.');
-          fs.readFile('data/DICCIONARIO_FORMA_FARMACEUTICA_SIMPLIFICADAS.xml', function (err, data) {
-            parser.parseString(data, function (err, data) {
-              var index = data.aemps_prescripcion_formas_farmaceuticas_simplificadas.formasfarmaceuticassimplificadas;
-              var count = 0;
-              for (var item in index) {
-                if (index.hasOwnProperty(item)) {
-                  var codigoformafarmaceuticasimplificada = index[item].codigoformafarmaceuticasimplificada.toString();
-                  var formafarmaceuticasimplificada = index[item].formafarmaceuticasimplificada.toString();
-                  Ffarmaceuticasimp.create({
-                    cod_forfar_simplificada: codigoformafarmaceuticasimplificada,
-                    forfar_simplificada: formafarmaceuticasimplificada
-                  }).exec(function (err, data) {
-                    if (err) reject(err);
-                    else {
-                      count++;
-                      if (count == index.length) resolve();
-                    }
-                  })
-                }
-              }
-            })
+        sails.log.info('[CRON] - Updating Ffarmaceuticasimp.');
+        var stream = fs.createReadStream('data/DICCIONARIO_FORMA_FARMACEUTICA_SIMPLIFICADAS.xml');
+        var xml = new XmlStream(stream);
+        xml.collect('formasfarmaceuticassimplificadas');
+        xml.on('endElement: formasfarmaceuticassimplificadas', function (item) {
+          xml.pause();
+          Ffarmaceuticasimp.create(item).exec(function (err, data) {
+            if (err) reject(err);
+            else {
+              xml.resume();
+            }
           })
         });
+        xml.on('end', function () {
+          sails.log.info("[CRON] - Finished updating Ffarmaceuticasimp.");
+          resolve();
+        });
+
+
+
+        // fs.readFile('data/DICCIONARIO_FORMA_FARMACEUTICA_SIMPLIFICADAS.xml', function (err, data) {
+        //   parser.parseString(data, function (err, data) {
+        //     var index = data.aemps_prescripcion_formas_farmaceuticas_simplificadas.formasfarmaceuticassimplificadas;
+        //     var count = 0;
+        //     for (var item in index) {
+        //       if (index.hasOwnProperty(item)) {
+        //         var codigoformafarmaceuticasimplificada = index[item].codigoformafarmaceuticasimplificada.toString();
+        //         var formafarmaceuticasimplificada = index[item].formafarmaceuticasimplificada.toString();
+        //         Ffarmaceuticasimp.create({
+        //           cod_forfar_simplificada: codigoformafarmaceuticasimplificada,
+        //           forfar_simplificada: formafarmaceuticasimplificada
+        //         }).exec(function (err, data) {
+        //           if (err) reject(err);
+        //           else {
+        //             count++;
+        //             if (count == index.length) resolve();
+        //           }
+        //         })
+        //       }
+        //     }
+        //   })
+        // })
       }
     })
   });

@@ -6,8 +6,6 @@
  */
 
 module.exports = {
-  update: function(req, res){
-    laboratorioUtil.update().then(function(){sails.log.info('[CRON] - Finished updating Laboratorio.')}).catch(function(err){sails.log.error('[ERROR] - '+err)})
-  }
+
 };
 

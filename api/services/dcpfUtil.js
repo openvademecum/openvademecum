@@ -8,51 +8,127 @@
  */
 
 const fs = require('fs');
-const xml2js = require('xml2js');
+const _ = require('lodash');
+const XmlStream = require('xml-stream');
 
-var parser = new xml2js.Parser({explicitArray: false});
+
+/******************Model Variables**********************/
+
+const itemName = 'dcpf';
+const modelName = 'dcpf';
+const itemIdName = 'codigodcpf';
+const xmlFile = 'data/DICCIONARIO_DCPF.xml';
+const endCollection = 'aemps_prescripcion_dcpf';
+
+/************************END*****************************/
+
 
 module.exports.update = function () {
-
   return new Promise(function (resolve, reject) {
-    sails.log.info('[CRON] - Destroying DCPF Collection.');
-    Dcpf.destroy().exec(function (err) {
-      if (err) {
-        sails.log.error("[CRON] - Error while destroying DCPF.");
-        reject();
-      }
-      else {
-        Dcpf.count().exec(function (error, count) {
-          sails.log.info("[CRON] - Found " + count + " items in DCPF");
-          sails.log.info('[CRON] - Updating DCPF.');
-          fs.readFile('data/DICCIONARIO_DCPF.xml', function (err, data) {
-            parser.parseString(data, function (err, data) {
-              var index = data.aemps_prescripcion_dcpf.dcpf;
-              var count = 0;
-              for (var item in index) {
-                if (index.hasOwnProperty(item)) {
-                  var codigodcpf = index[item].codigodcpf.toString();
-                  var nombredcpf = index[item].nombredcpf.toString();
-                  var nombrecortodcpf = index[item].nombrecortodcpf.toString();
-                  var codigodcp = index[item].codigodcp.toString();
-                  Dcpf.create({
-                    codigodcpf: codigodcpf,
-                    nombredcpf: nombredcpf,
-                    nombrecortodcpf: nombrecortodcpf,
-                    codigodcp: codigodcp
-                  }).exec(function (err, data) {
+
+    var insertedIds = [];
+    var updatedIds = [];
+    var allIds = [];
+    var ids = [];
+
+    sails.log.info("[CRON] - [DCPF] - Updating DCPF...");
+
+
+    //Get all Collection IDs.
+    Dcpf.native(function (err, collection) {
+      if (err) reject(err);
+      collection.aggregate([{$group: {_id: null, ids: {$addToSet: "$_id"}}}]).toArray(function (err, results) {
+        if (err) reject(err);
+        else if (results[0] && results[0].hasOwnProperty('ids')) ids = results[0].ids;
+
+        var stream = fs.createReadStream(xmlFile);
+        var xml = new XmlStream(stream);
+        //Create or update of all entries on xml
+        xml.collect(itemName);
+        xml.on('endElement: ' + itemName, function (item) {
+          xml.pause();
+
+          var element = item;
+          var id = item[itemIdName];
+          delete item[itemIdName];
+          item._id = id;
+          allIds.push(item._id);
+
+          Dcpf.findOne({_id: item._id}).exec(function (err, oldItem) {
+            if (err) reject(err);
+
+            Dcpf.native(function (err, collection) {
+              if (err) reject(err);
+
+              collection.updateOne({codigodcpf: id}, {$set: item}, {upsert: true}, function (err, results) {
+                if (err) reject(err);
+
+                results = JSON.parse(results);
+                if (results.hasOwnProperty('upserted')) {
+                  //Item inserted
+                  insertedIds.push(results.upserted[0]._id);
+                  Updates.create({
+                    model: modelName,
+                    new_item: element,
+                    inserted: true,
+                    updated: false,
+                    deleted: false
+                  }).exec(function (err, results) {
                     if (err) reject(err);
-                    else {
-                      count++;
-                      if (count == index.length) resolve();
-                    }
+                    xml.resume()
                   })
-                }
-              }
-            })
-          })
+                } else if (results['nModified'] == 1) {
+                  //Item modified
+                  updatedIds.push(item._id);
+                  Updates.create({
+                    model: modelName,
+                    old_item: oldItem,
+                    new_item: element,
+                    inserted: false,
+                    updated: true,
+                    deleted: false
+                  }).exec(function (err, results) {
+                    if (err) reject(err);
+                    xml.resume();
+                  })
+                } else xml.resume();
+              })
+            });
+
+          });
+
+
         });
-      }
-    })
+        xml.on('endElement: ' + endCollection, function () {
+          //Compare new IDS with old ones.
+          var deletedIds = _.difference(ids, allIds);
+
+          //Delete ids not included.
+          Dcpf.native(function (err, collection) {
+            if (err) reject(err);
+
+            deletedIds.forEach(function (entry) {
+              Dcpf.findOne({_id: entry}).exec(function (err, beforeDelete) {
+                if (err) reject(err);
+
+                collection.deleteOne({_id: entry}, function (err, results) {
+                  if (err) reject(err);
+                  Updates.create({
+                    model: modelName,
+                    old_item: beforeDelete,
+                    inserted: false,
+                    updated: false,
+                    deleted: true
+                  }).exec(function (err, results) {
+                    if (err) reject(err);
+                  })
+                })
+              })
+            })
+          });
+          resolve();
+        });
+      })
+    });
   });
 };

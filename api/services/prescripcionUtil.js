@@ -8,9 +8,7 @@
  */
 
 const fs = require('fs');
-const xml2js = require('xml2js');
-
-var parser = new xml2js.Parser({explicitArray: false});
+const XmlStream = require('xml-stream');
 
 module.exports.update = function () {
 
@@ -22,25 +20,23 @@ module.exports.update = function () {
         reject();
       }
       else {
-        Prescripcion.count().exec(function (error, count) {
-          sails.log.info("[CRON] - Found " + count + " items in Prescripcion");
-          sails.log.info('[CRON] - Updating Prescripcion.');
-          fs.readFile('data/Prescripcion.xml', function (err, data) {
-            parser.parseString(data, function (err, data) {
-              var index = data.aemps_prescripcion.prescription;
-              for (var item in index) {
-                if (index.hasOwnProperty(item)) {
-                  Prescripcion.create(index[item]).exec(function (err, data) {
-                    if (err) reject(err);
-                    else {
-                      count++;
-                      if (count == index.length) resolve();
-                    }
-                  })
-                }
-              }
-            })
+        sails.log.info('[CRON] - Updating Prescripcion.');
+        var stream = fs.createReadStream('data/Prescripcion.xml');
+        var xml = new XmlStream(stream);
+        xml.collect('prescripcion');
+        xml.on('endElement: prescription', function (item) {
+          xml.pause();
+          Prescripcion.create(item).exec(function (err, data) {
+            if (err) reject(err);
+            else {
+              global.gc();
+              xml.resume();
+            }
           })
+        });
+        xml.on('end', function () {
+          sails.log.info("[CRON] - Finished updating Prescripcion.");
+          resolve();
         });
       }
     })
