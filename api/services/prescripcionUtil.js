@@ -83,6 +83,11 @@ module.exports.update = function () {
                     deleted: false
                   }).exec(function (err, results) {
                     if (err) reject(err);
+                    item=null;
+                    element=null;
+                    oldItem=null;
+                    results=null;
+                    global.gc();
                     xml.resume()
                   })
                 } else if (results['nModified'] == 1) {
@@ -97,9 +102,21 @@ module.exports.update = function () {
                     deleted: false
                   }).exec(function (err, results) {
                     if (err) reject(err);
+                    item=null;
+                    element=null;
+                    oldItem=null;
+                    results=null;
+                    global.gc();
                     xml.resume();
                   })
-                } else xml.resume();
+                } else{
+                  item=null;
+                  element=null;
+                  oldItem=null;
+                  results=null;
+                  global.gc();
+                  xml.resume();
+                }
               })
             });
 
@@ -109,6 +126,7 @@ module.exports.update = function () {
         });
         xml.on('endElement: ' + endCollection, function () {
           //Compare new IDS with old ones.
+          global.gc();
           var deletedIds = _.difference(ids, allIds);
 
           //Delete ids not included.
