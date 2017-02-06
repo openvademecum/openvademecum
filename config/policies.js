@@ -27,6 +27,78 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
+  // 'find':true,
+  // 'findOne' : true,
+  // 'test' : true
+
+  // AtcController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },
+  // DcpController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },
+  // DcpfController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },
+  // DcsaController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },
+  // EnvasesController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },ExcipientesController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },FfarmaceuticaController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },
+  // FfarmaceuticasimpController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },
+  // LaboratorioController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },
+  // PactivosController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },
+  // PrescripcionController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },
+  // SitRegistroController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },
+  // UniContController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // },
+  // VAdmonController: {
+  //   'find': true,
+  //   'findOne': true,
+  //   '*': false
+  // }
 
   /***************************************************************************
   *                                                                          *
