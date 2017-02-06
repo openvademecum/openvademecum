@@ -82,19 +82,27 @@ module.exports = {
     //   }).catch(function (err) {sendErrorMail(err)});
     // }).catch(function (err) {sendErrorMail(err)});
 
-    unicontUtil.update().then(function () {
+    //   unicontUtil.update().then(function () {
+    //     global.gc();
+    //     vadmonUtil.update().then(function () {
+    //       global.gc();
+    //       prescripcionUtil.update().then(function () {
+    //         global.gc();
+    //         sendOkMail();
+    //       }).catch(function (err) {
+    //         sendErrorMail(err)
+    //       });
+    //     }).catch(function (err) {
+    //       sendErrorMail(err)
+    //     });
+    //   }).catch(function (err) {
+    //     sendErrorMail(err)
+    //   });
+    // }
+
+    prescripcionUtil.update().then(function () {
       global.gc();
-      vadmonUtil.update().then(function () {
-        global.gc();
-        prescripcionUtil.update().then(function () {
-          global.gc();
-          sendOkMail();
-        }).catch(function (err) {
-          sendErrorMail(err)
-        });
-      }).catch(function (err) {
-        sendErrorMail(err)
-      });
+      sendOkMail();
     }).catch(function (err) {
       sendErrorMail(err)
     });

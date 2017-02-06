@@ -45,6 +45,14 @@ module.exports.update = function () {
         var xml = new XmlStream(stream);
         //Create or update of all entries on xml
         xml.collect(itemName);
+        xml.collect('composicion_pa');
+        xml.collect('duplicidades');
+        xml.collect('excipientes');
+        xml.collect('interacciones_atc');
+        xml.collect('desaconsejados_geriatria');
+        xml.collect('viasadministracion');
+        xml.collect('formasfarmaceuticas');
+        xml.collect('notaseguridad');
         xml.on('endElement: ' + itemName, function (item) {
           xml.pause();
 
