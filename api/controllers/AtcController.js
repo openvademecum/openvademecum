@@ -99,10 +99,13 @@ module.exports = {
     //     sendErrorMail(err)
     //   });
     // }
-
-    prescripcionUtil.update().then(function () {
-      global.gc();
-      sendOkMail();
+    pullUtil.pull().then(function () {
+      prescripcionUtil.update().then(function () {
+        global.gc();
+        sendOkMail();
+      }).catch(function (err) {
+        sendErrorMail(err)
+      });
     }).catch(function (err) {
       sendErrorMail(err)
     });
