@@ -8,69 +8,127 @@
  */
 
 const fs = require('fs');
+const _ = require('lodash');
 const XmlStream = require('xml-stream');
 
-module.exports.update = function () {
 
+/******************Model Variables**********************/
+
+const itemName = 'laboratorios';
+const modelName = 'laboratorio';
+const itemIdName = 'codigolaboratorio';
+const xmlFile = 'data/DICCIONARIO_LABORATORIOS.xml';
+const endCollection = 'aemps_prescripcion_laboratorios';
+
+/************************END*****************************/
+
+
+module.exports.update = function () {
   return new Promise(function (resolve, reject) {
-    sails.log.info('[CRON] - Destroying Laboratorio Collection.');
-    Laboratorio.destroy().exec(function (err) {
-      if (err) {
-        sails.log.error("[CRON] - Error while destroying Laboratorio.");
-        reject();
-      }
-      else {
-        sails.log.info('[CRON] - Updating Laboratorio.');
-        var stream = fs.createReadStream('data/DICCIONARIO_LABORATORIOS.xml');
+
+    var insertedIds = [];
+    var updatedIds = [];
+    var allIds = [];
+    var ids = [];
+
+    sails.log.info("[CRON] - [Laboratorios] - Updating Laboratorios...");
+
+
+    //Get all Collection IDs
+    Laboratorio.native(function (err, collection) {
+      if (err) reject(err);
+      collection.aggregate([{$group: {_id: null, ids: {$addToSet: "$_id"}}}]).toArray(function (err, results) {
+        if (err) reject(err);
+        else if (results[0] && results[0].hasOwnProperty('ids')) ids = results[0].ids;
+
+        var stream = fs.createReadStream(xmlFile);
         var xml = new XmlStream(stream);
-        xml.collect('laboratorios');
-        xml.on('endElement: laboratorios', function (item) {
+        //Create or update of all entries on xml
+        xml.collect(itemName);
+        xml.on('endElement: ' + itemName, function (item) {
           xml.pause();
-          Laboratorio.create(item).exec(function (err, data) {
+
+          var element = item;
+          var id = item[itemIdName];
+          delete item[itemIdName];
+          item._id = id;
+          allIds.push(item._id);
+
+          Laboratorio.findOne({_id: item._id}).exec(function (err, oldItem) {
             if (err) reject(err);
-            else {
-              xml.resume();
-            }
-          })
+
+            Laboratorio.native(function (err, collection) {
+              if (err) reject(err);
+
+              collection.updateOne({codigolaboratorio: id}, {$set: item}, {upsert: true}, function (err, results) {
+                if (err) reject(err);
+
+                results = JSON.parse(results);
+                if (results.hasOwnProperty('upserted')) {
+                  //Item inserted
+                  insertedIds.push(results.upserted[0]._id);
+                  Updates.create({
+                    model: modelName,
+                    new_item: element,
+                    inserted: true,
+                    updated: false,
+                    deleted: false
+                  }).exec(function (err, results) {
+                    if (err) reject(err);
+                    xml.resume()
+                  })
+                } else if (results['nModified'] == 1) {
+                  //Item modified
+                  updatedIds.push(item._id);
+                  Updates.create({
+                    model: modelName,
+                    old_item: oldItem,
+                    new_item: element,
+                    inserted: false,
+                    updated: true,
+                    deleted: false
+                  }).exec(function (err, results) {
+                    if (err) reject(err);
+                    xml.resume();
+                  })
+                } else xml.resume();
+              })
+            });
+
+          });
+
+
         });
-        xml.on('end', function () {
-          sails.log.info("[CRON] - Finished updating Laboratorio.");
+        xml.on('endElement: ' + endCollection, function () {
+          //Compare new IDS with old ones.
+          var deletedIds = _.difference(ids, allIds);
+
+          //Delete ids not included.
+          Laboratorio.native(function (err, collection) {
+            if (err) reject(err);
+
+            deletedIds.forEach(function (entry) {
+              Laboratorio.findOne({_id: entry}).exec(function (err, beforeDelete) {
+                if (err) reject(err);
+
+                collection.deleteOne({_id: entry}, function (err, results) {
+                  if (err) reject(err);
+                  Updates.create({
+                    model: modelName,
+                    old_item: beforeDelete,
+                    inserted: false,
+                    updated: false,
+                    deleted: true
+                  }).exec(function (err, results) {
+                    if (err) reject(err);
+                  })
+                })
+              })
+            })
+          });
           resolve();
         });
-
-
-
-
-
-        // fs.readFile('data/DICCIONARIO_LABORATORIOS.xml', function (err, data) {
-        //   parser.parseString(data, function (err, data) {
-        //     var index = data.aemps_prescripcion_laboratorios.laboratorios;
-        //     var count = 0;
-        //     for (var item in index) {
-        //       if (index.hasOwnProperty(item)) {
-        //         var codigolaboratorio = index[item].codigolaboratorio.toString();
-        //         var laboratorio = index[item].laboratorio.toString();
-        //         var direccion = index[item].direccion.toString();
-        //         var codigopostal = index[item].codigopostal || null;
-        //         var localidad = index[item].localidad || null;
-        //         Laboratorio.create({
-        //           codigolaboratorio: codigolaboratorio,
-        //           laboratorio: laboratorio,
-        //           direccion: direccion,
-        //           codigopostal: codigopostal,
-        //           localidad: localidad
-        //         }).exec(function (err, data) {
-        //           if (err) reject(err);
-        //           else {
-        //             count++;
-        //             if (count == index.length) resolve();
-        //           }
-        //         })
-        //       }
-        //     }
-        //   })
-        // })
-      }
-    })
+      })
+    });
   });
 };
