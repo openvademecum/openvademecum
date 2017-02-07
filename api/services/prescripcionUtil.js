@@ -45,7 +45,6 @@ module.exports.update = function () {
         var stream = fs.createReadStream(xmlFile);
         var xml = new XmlStream(stream);
         //Create or update of all entries on xml
-        //xml.collect(itemName);
         xml.collect('composicion_pa');
         xml.collect('duplicidades');
         xml.collect('excipientes');
@@ -139,23 +138,3 @@ module.exports.update = function () {
     });
   });
 };
-
-function generateHeapDumpAndStats(){
-  //1. Force garbage collection every time this function is called
-  try {
-    global.gc();
-  } catch (e) {
-    console.log("You must run program with 'node --expose-gc index.js' or 'npm start'");
-    process.exit();
-  }
-
-  //2. Output Heap stats
-  var heapUsed = process.memoryUsage().heapUsed;
-  console.log("Program is using " + heapUsed + " bytes of Heap.");
-
-  //3. Get Heap dump
-  heapdump.writeSnapshot()
-}
-
-//Kick off the program
-setInterval(generateHeapDumpAndStats, 20000);
