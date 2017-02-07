@@ -71,7 +71,7 @@ module.exports.cron = {
         }).catch(function (err) {sendErrorMail(err)});
       }).catch(function (err) {sendErrorMail(err)});
     },
-    start: true,
+    start: false,
     timezone: 'Europe/Madrid',
     context: undefined
   }
