@@ -10,6 +10,7 @@
 const fs = require('fs');
 const _ = require('lodash');
 const XmlStream = require('xml-stream');
+const heapdump = require('heapdump');
 
 
 /******************Model Variables**********************/
@@ -44,7 +45,7 @@ module.exports.update = function () {
         var stream = fs.createReadStream(xmlFile);
         var xml = new XmlStream(stream);
         //Create or update of all entries on xml
-        xml.collect(itemName);
+        //xml.collect(itemName);
         xml.collect('composicion_pa');
         xml.collect('duplicidades');
         xml.collect('excipientes');
@@ -56,69 +57,50 @@ module.exports.update = function () {
         xml.on('endElement: ' + itemName, function (item) {
           xml.pause();
 
+
           var element = item;
           var id = item[itemIdName];
           delete item[itemIdName];
           item._id = id;
           allIds.push(item._id);
 
-          Prescripcion.findOne({_id: item._id}).exec(function (err, oldItem) {
+          collection.findOne({_id: item._id}, function (err, oldItem) {
             if (err) reject(err);
 
-            Prescripcion.native(function (err, collection) {
+            collection.updateOne({cod_nacion: id}, {$set: item}, {upsert: true}, function (err, results) {
               if (err) reject(err);
 
-              collection.updateOne({cod_nacion: id}, {$set: item}, {upsert: true}, function (err, results) {
-                if (err) reject(err);
-
-                results = JSON.parse(results);
-                if (results.hasOwnProperty('upserted')) {
-                  //Item inserted
-                  insertedIds.push(results.upserted[0]._id);
-                  Updates.create({
-                    model: modelName,
-                    new_item: element,
-                    inserted: true,
-                    updated: false,
-                    deleted: false
-                  }).exec(function (err, results) {
-                    if (err) reject(err);
-                    item=null;
-                    element=null;
-                    oldItem=null;
-                    results=null;
-                    global.gc();
-                    xml.resume()
-                  })
-                } else if (results['nModified'] == 1) {
-                  //Item modified
-                  updatedIds.push(item._id);
-                  Updates.create({
-                    model: modelName,
-                    old_item: oldItem,
-                    new_item: element,
-                    inserted: false,
-                    updated: true,
-                    deleted: false
-                  }).exec(function (err, results) {
-                    if (err) reject(err);
-                    item=null;
-                    element=null;
-                    oldItem=null;
-                    results=null;
-                    global.gc();
-                    xml.resume();
-                  })
-                } else{
-                  item=null;
-                  element=null;
-                  oldItem=null;
-                  results=null;
-                  global.gc();
+              results = JSON.parse(results);
+              if (results.hasOwnProperty('upserted')) {
+                //Item inserted
+                insertedIds.push(results.upserted[0]._id);
+                Updates.create({
+                  model: modelName,
+                  new_item: element,
+                  inserted: true,
+                  updated: false,
+                  deleted: false
+                }).exec(function (err, results) {
+                  if (err) reject(err);
+                  xml.resume()
+                })
+              } else if (results['nModified'] == 1) {
+                //Item modified
+                updatedIds.push(item._id);
+                Updates.create({
+                  model: modelName,
+                  old_item: oldItem,
+                  new_item: element,
+                  inserted: false,
+                  updated: true,
+                  deleted: false
+                }).exec(function (err, results) {
+                  if (err) reject(err);
                   xml.resume();
-                }
-              })
-            });
+                })
+              } else xml.resume();
+            })
+
 
           });
 
@@ -126,7 +108,6 @@ module.exports.update = function () {
         });
         xml.on('endElement: ' + endCollection, function () {
           //Compare new IDS with old ones.
-          global.gc();
           var deletedIds = _.difference(ids, allIds);
 
           //Delete ids not included.
@@ -158,3 +139,23 @@ module.exports.update = function () {
     });
   });
 };
+
+function generateHeapDumpAndStats(){
+  //1. Force garbage collection every time this function is called
+  try {
+    global.gc();
+  } catch (e) {
+    console.log("You must run program with 'node --expose-gc index.js' or 'npm start'");
+    process.exit();
+  }
+
+  //2. Output Heap stats
+  var heapUsed = process.memoryUsage().heapUsed;
+  console.log("Program is using " + heapUsed + " bytes of Heap.");
+
+  //3. Get Heap dump
+  heapdump.writeSnapshot()
+}
+
+//Kick off the program
+setInterval(generateHeapDumpAndStats, 20000);

@@ -22,7 +22,7 @@ var ko = {
 };
 module.exports.cron = {
   pull: {
-    schedule: '0 * * * *',
+    schedule: '0 */3 * * *', //Every 3 hours.
     onTick: function () {
       pullUtil.pull().then(function () {
         global.gc();
