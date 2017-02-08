@@ -4,6 +4,6 @@ module.exports.swagger = {
    */
   pkg: require('../package'),
   ui: {
-    url: 'http://swagger.openvademecum.es'
+    url: 'http://openvademecum.es'
   }
 };
