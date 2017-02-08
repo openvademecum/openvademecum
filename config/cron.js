@@ -22,7 +22,7 @@ var ko = {
 };
 module.exports.cron = {
   pull: {
-    schedule: '0 */3 * * *', //Every 3 hours.
+    schedule: '0 2 * * *', //Every day at 2am.
     onTick: function () {
       pullUtil.pull().then(function () {
         global.gc();
@@ -71,7 +71,7 @@ module.exports.cron = {
         }).catch(function (err) {sendErrorMail(err)});
       }).catch(function (err) {sendErrorMail(err)});
     },
-    start: false,
+    start: true,
     timezone: 'Europe/Madrid',
     context: undefined
   }
