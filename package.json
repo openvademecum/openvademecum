@@ -18,7 +18,7 @@
     "sails-swagger": "^0.5.1",
     "underscore": "^1.8.3",
     "unzip": "^0.1.11",
-    "xml-stream": "^0.4.5",
+    "xml-stream": "^0.4.5"
   },
   "scripts": {
     "debug": "node debug app.js",
