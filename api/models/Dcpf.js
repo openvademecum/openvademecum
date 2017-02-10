@@ -24,7 +24,7 @@ module.exports = {
       type:'string'
     },
     codigodcp: {
-      type:'integer'
+      model:'dcp'
     }
   }
 };
