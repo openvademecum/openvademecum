@@ -10,12 +10,13 @@ module.exports = {
   attributes: {
     id: {
       type: 'integer',
-      unique: true,
-      primaryKey: true
+      unique: true
+
     },
     cod_nacion: {
       type:'integer',
-      unique: true
+      unique: true,
+      primaryKey: true
     },
     nro_definitivo: {type:'string'},
     des_nomco: {type:'string'},
