@@ -8,5 +8,9 @@
 
 module.exports = {
 
+  test: function(req, res) {
+    res.ok();
+    prescripcionUtil.update();
+  }
 };
 

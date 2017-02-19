@@ -11,6 +11,7 @@ const fs = require('fs');
 const _ = require('lodash');
 const XmlStream = require('xml-stream');
 const heapdump = require('heapdump');
+const flatten = require('flat')
 
 
 /******************Model Variables**********************/
@@ -51,13 +52,19 @@ module.exports.update = function () {
         xml.collect('interacciones_atc');
         xml.collect('desaconsejados_geriatria');
         xml.collect('viasadministracion');
-        xml.collect('formasfarmaceuticas');
+        //xml.collect('formasfarmaceuticas');
         xml.collect('notaseguridad');
         xml.on('endElement: ' + itemName, function (item) {
           xml.pause();
+          sails.log.info("ELEMENT: "+JSON.stringify(item));
+
+          var aux = flatten(item, {safe: true, maxDepth: 2, delimiter:'_' });
+
+          sails.log.info("FLATTEN: "+JSON.stringify(aux));
 
 
-          var element = item;
+
+          /*var element = item;
           var id = item[itemIdName];
           delete item[itemIdName];
           item._id = id;
@@ -99,10 +106,10 @@ module.exports.update = function () {
                 })
               } else xml.resume();
             })
-          });
+          });*/
         });
         xml.on('endElement: ' + endCollection, function () {
-          //Compare new IDS with old ones.
+          /*//Compare new IDS with old ones.
           var deletedIds = _.difference(ids, allIds);
 
           //Delete ids not included.
@@ -127,7 +134,7 @@ module.exports.update = function () {
                 })
               })
             })
-          });
+          });*/
           resolve();
         });
       })

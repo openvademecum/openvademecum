@@ -1,0 +1,246 @@
+{
+  "cod_nacion": "936492",
+  "nro_definitivo": "65526",
+  "des_nomco": "NUROFEN 40 MG/ML SUSPENSION ORAL",
+  "des_prese": "NUROFEN 40 MG/ML SUSPENSION ORAL , 1 frasco de 150 ml",
+  "cod_dcsa": "38268001",
+  "cod_dcp": "24711000140105",
+  "cod_dcpf": "24721000140101",
+  "des_dosific": "40 mg/ml",
+  "cod_envase": "6",
+  "contenido": "150",
+  "unid_contenido": "32",
+  "nro_conte": "1 frasco de 150 ml",
+  "sw_psicotropo": "0",
+  "sw_estupefaciente": "0",
+  "sw_afecta_conduccion": "0",
+  "sw_triangulo_negro": "0",
+  "url_fictec": "http://www.aemps.gob.es/cima/pdfs/es/ft/65526/65526_ft.pdf",
+  "url_prosp": "http://www.aemps.gob.es/cima/pdfs/es/p/65526/65526_p.pdf",
+  "sw_receta": "0",
+  "sw_generico": "0",
+  "sw_sustituible": "1",
+  "sw_envase_clinico": "0",
+  "sw_uso_hospitalario": "0",
+  "sw_diagnostico_hospitalario": "0",
+  "sw_tld": "0",
+  "sw_especial_control_medico": "0",
+  "sw_huerfano": "0",
+  "sw_base_a_plantas": "0",
+  "laboratorio_titular": "7742",
+  "laboratorio_comercializador": "7742",
+  "fecha_autorizacion": "2003-07-18",
+  "sw_comercializado": "1",
+  "fec_comer": "2011-10-19",
+  "cod_sitreg": "1",
+  "cod_sitreg_presen": "1",
+  "fecha_situacion_registro": "2003-07-18",
+  "fec_sitreg_presen": "2003-07-18",
+  "sw_tiene_excipientes_decl_obligatoria": "1",
+  "biosimilar": "0",
+  "importacion_paralela": "0",
+  "formasfarmaceuticas_cod_forfar": "6",
+  "formasfarmaceuticas_cod_forfar_simplificada": "93",
+  "formasfarmaceuticas_nro_pactiv": "1",
+  "formasfarmaceuticas_composicion_pa": [{
+    "cod_principio_activo": "2765",
+    "orden_colacion": "1",
+    "dosis_pa": "40",
+    "unidad_dosis_pa": "mg",
+    "dosis_composicion": "1",
+    "unidad_composicion": "ml",
+    "dosis_administracion": "1",
+    "unidad_administracion": "ml",
+    "dosis_prescripcion": "40",
+    "unidad_prescripcion": "mg"
+  }],
+  "formasfarmaceuticas_excipientes": [{
+    "cod_excipiente": "1801"
+  }, {
+    "cod_excipiente": "2362"
+  }, {
+    "cod_excipiente": "2479"
+  }, {
+    "cod_excipiente": "2860"
+  }, {
+    "cod_excipiente": "4661"
+  }, {
+    "cod_excipiente": "4885"
+  }, {
+    "cod_excipiente": "7316"
+  }, {
+    "cod_excipiente": "15404"
+  }],
+  "formasfarmaceuticas_viasadministracion": [{
+    "cod_via_admin": "54"
+  }],
+  "notaseguridad": [{
+    "numero_nota_seguridad": "04/2015",
+    "referencia_nota_seguridad": "MUH (FV) 04/2015",
+    "asunto_nota_seguridad": "RIESGO CARDIOVASCULAR DE DOSIS ALTAS DE IBUPROFENO O DEXIBUPROFENO: RECOMENDACIONES DE USO",
+    "fecha_nota_seguridad": "13/04/2015",
+    "url_nota_seguridad": "http://www.aemps.gob.es/informa/notasInformativas/medicamentosUsoHumano/seguridad/2015/NI-MUH_FV_04-ibuprofeno-dexibuprofeno.htm"
+  }],
+  "atc_cod_atc": "M01AE01",
+  "atc_teratogenia": "A,B o C (D) - Medicamento desaconsejado en alguna etapa del embarazo o en alguna circunstancia determinada. Consultar ficha técnica.",
+  "atc_interacciones_atc": [{
+    "atc_interaccion": "B01AA",
+    "descripcion_atc_interaccion": "Antagonistas de la vitamina K",
+    "efecto_interaccion": "Aumento del riesgo de hemorragias (especialmente gastrointestinales).",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento. Se recomienda añadir gastroprotector y controlar signos de hemorragia."
+  }, {
+    "atc_interaccion": "M01AH",
+    "descripcion_atc_interaccion": "Coxibs",
+    "efecto_interaccion": "Aumento del riesgo de úlcera péptica y hemorragia digestiva.",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento."
+  }, {
+    "atc_interaccion": "B01AF",
+    "descripcion_atc_interaccion": "Inhibidores directos del Factor X a",
+    "efecto_interaccion": "Aumento del riesgo de hemorragias (especialmente gastrointestinales).",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento. Se recomienda añadir gastroprotector y controlar signos de hemorragia."
+  }, {
+    "atc_interaccion": "M01AB",
+    "descripcion_atc_interaccion": "Derivados del acido acetico y sustancias relacionadas",
+    "efecto_interaccion": "Aumento del riesgo de úlcera péptica y hemorragia digestiva.",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento."
+  }, {
+    "atc_interaccion": "M01AX22",
+    "descripcion_atc_interaccion": "Morniflumato",
+    "efecto_interaccion": "Aumento del riesgo de úlcera péptica y hemorragia digestiva.",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento."
+  }, {
+    "atc_interaccion": "N05AN01",
+    "descripcion_atc_interaccion": "Litio",
+    "efecto_interaccion": "Aumento del riesgo de toxicidad por litio.",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento. Se recomienda monitorizar los niveles de litio."
+  }, {
+    "atc_interaccion": "B01AE07",
+    "descripcion_atc_interaccion": "Dabigatran etexilato",
+    "efecto_interaccion": "Aumento del riesgo de hemorragias (especialmente gastrointestinales).",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento. Se recomienda añadir gastroprotector y controlar signos de hemorragia."
+  }, {
+    "atc_interaccion": "M01AC",
+    "descripcion_atc_interaccion": "Oxicams",
+    "efecto_interaccion": "Aumento del riesgo de úlcera péptica y hemorragia digestiva.",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento."
+  }, {
+    "atc_interaccion": "M01AX01",
+    "descripcion_atc_interaccion": "Nabumetona",
+    "efecto_interaccion": "Aumento del riesgo de úlcera péptica y hemorragia digestiva.",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento."
+  }, {
+    "atc_interaccion": "M01AG",
+    "descripcion_atc_interaccion": "Fenamatos",
+    "efecto_interaccion": "Aumento del riesgo de úlcera péptica y hemorragia digestiva.",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento."
+  }, {
+    "atc_interaccion": "M01AX02",
+    "descripcion_atc_interaccion": "Acido niflumicos",
+    "efecto_interaccion": "Aumento del riesgo de úlcera péptica y hemorragia digestiva.",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento."
+  }, {
+    "atc_interaccion": "M01AX93",
+    "descripcion_atc_interaccion": "Isonixina",
+    "efecto_interaccion": "Aumento del riesgo de úlcera péptica y hemorragia digestiva.",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento."
+  }, {
+    "atc_interaccion": "N02BA01",
+    "descripcion_atc_interaccion": "Acido acetilsalicilico analgesico",
+    "efecto_interaccion": "Aumento del riesgo de úlcera péptica y hemorragia digestiva.",
+    "recomendacion_interaccion": "Asociación desaconsejada. Valorar el beneficio/riesgo del tratamiento."
+  }],
+  "atc_desaconsejados_geriatria": [{
+    "alerta_geriatria": "Historia de úlcera péptica o sangrado gastrointestinal sin tratamiento gastroprotector",
+    "riesgo_pacience_geriatria": "Riesgo de reaparición de la úlcera péptica o sangrado gástrico.",
+    "recomendacion_geriatria": "Evitar el uso del AINE, si fuese imprescindible su utilización, utilizarlo el menor tiempo posible y añadir un gastoprotector (IBP o antiH2)."
+  }, {
+    "alerta_geriatria": "Pacientes con hipertensión grave",
+    "riesgo_pacience_geriatria": "Riesgo de aumento de las cifras de tensión arterial",
+    "recomendacion_geriatria": "Evitar su uso o bien utilizar otras alternativas para el tratamiento del dolor como el paracetamol."
+  }, {
+    "alerta_geriatria": "Uso concomitante con antiagregantes",
+    "riesgo_pacience_geriatria": "Aumento del riesgo de hemorragia gastrointestinal.",
+    "recomendacion_geriatria": "Evitar el uso del AINE, y si fuese imprescindible su utilización, utilizarlo el menor tiempo posible y añadir un gastoprotector (IBP o antiH2)."
+  }, {
+    "alerta_geriatria": "Utilización superior a 3 meses sin  contraindicación al alopurinol",
+    "riesgo_pacience_geriatria": "Aumento del riesgo de hemorragia gastrointestinal y úlcera péptica.",
+    "recomendacion_geriatria": "Se recomienda utilizar  alopurinol ya que  es el tratamiento de elección en la profilaxis de la gota."
+  }, {
+    "alerta_geriatria": "Pacientes con insuficiencia cardiaca grave",
+    "riesgo_pacience_geriatria": "Riesgo de descompensación de la insuficiencia cardiaca.",
+    "recomendacion_geriatria": "Evitar su uso o bien utilizar otras alternativas para el tratamiento del dolor como el paracetamol."
+  }, {
+    "alerta_geriatria": "Uso concomitante con corticoides sistémicos",
+    "riesgo_pacience_geriatria": "Aumento del riesgo de hemorragia gastrointestinal.",
+    "recomendacion_geriatria": "Evitar el uso del AINE, y si fuese imprescindible su utilización, utilizarlo el menor tiempo posible y añadir un gastoprotector (IBP o antiH2)."
+  }, {
+    "alerta_geriatria": "Uso concomitante con anticoagulantes orales (G_ACO)",
+    "riesgo_pacience_geriatria": "Aumento del riesgo de hemorragia gastrointestinal.",
+    "recomendacion_geriatria": "Evitar el uso del AINE, y si fuese imprescindible su utilización, utilizarlo el menor tiempo posible y añadir un gastoprotector (IBP o antiH2)."
+  }, {
+    "alerta_geriatria": "Utilización superior a 3 meses, en  dolor articular sin haber utilizado paracetamol previamente.",
+    "riesgo_pacience_geriatria": "Aumento del riesgo de hemorragia gastrointestinal.",
+    "recomendacion_geriatria": "Evitar su uso y utilizar otros analgésicos con eficacia similar como el paracetamol."
+  }],
+  "atc_duplicidades": [{
+    "atc_duplicidad": "M01AX93",
+    "descripcion_atc_duplicidad": "Isonixina",
+    "efecto_duplicidad": "Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica.",
+    "recomendacion_duplicidad": "Suspender el principio(s) activo(s) con la misma actividad farmacológica."
+  }, {
+    "atc_duplicidad": "M01AA",
+    "descripcion_atc_duplicidad": "Butilpirazolidinas",
+    "efecto_duplicidad": "Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica.",
+    "recomendacion_duplicidad": "Suspender el principio(s) activo(s) con la misma actividad farmacológica."
+  }, {
+    "atc_duplicidad": "M01AE",
+    "descripcion_atc_duplicidad": "Derivados del acido propionico",
+    "efecto_duplicidad": "Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica.",
+    "recomendacion_duplicidad": "Suspender el principio(s) activo(s) con la misma actividad farmacológica."
+  }, {
+    "atc_duplicidad": "M01AH",
+    "descripcion_atc_duplicidad": "Coxibs",
+    "efecto_duplicidad": "Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica.",
+    "recomendacion_duplicidad": "Suspender el principio(s) activo(s) con la misma actividad farmacológica."
+  }, {
+    "atc_duplicidad": "M01AX01",
+    "descripcion_atc_duplicidad": "Nabumetona",
+    "efecto_duplicidad": "Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica.",
+    "recomendacion_duplicidad": "Suspender el principio(s) activo(s) con la misma actividad farmacológica."
+  }, {
+    "atc_duplicidad": "M01AX02",
+    "descripcion_atc_duplicidad": "Acido niflumico",
+    "efecto_duplicidad": "Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica.",
+    "recomendacion_duplicidad": "Suspender el principio(s) activo(s) con la misma actividad farmacológica."
+  }, {
+    "atc_duplicidad": "M01AC",
+    "descripcion_atc_duplicidad": "Oxicams",
+    "efecto_duplicidad": "Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica.",
+    "recomendacion_duplicidad": "Suspender el principio(s) activo(s) con la misma actividad farmacológica."
+  }, {
+    "atc_duplicidad": "M01AG",
+    "descripcion_atc_duplicidad": "Fenamatos",
+    "efecto_duplicidad": "Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica.",
+    "recomendacion_duplicidad": "Suspender el principio(s) activo(s) con la misma actividad farmacológica."
+  }, {
+    "atc_duplicidad": "M01AB",
+    "descripcion_atc_duplicidad": "Derivados del acido acetico y sustancias relacionadas",
+    "efecto_duplicidad": "Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica.",
+    "recomendacion_duplicidad": "Suspender el principio(s) activo(s) con la misma actividad farmacológica."
+  }, {
+    "atc_duplicidad": "M01AX22",
+    "descripcion_atc_duplicidad": "Morniflumato",
+    "efecto_duplicidad": "Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica.",
+    "recomendacion_duplicidad": "Suspender el principio(s) activo(s) con la misma actividad farmacológica."
+  }, {
+    "atc_duplicidad": "M01BA",
+    "descripcion_atc_duplicidad": "Agentes antiinflamatorios/antirreumaticos en combinacion con corticosteroides",
+    "efecto_duplicidad": "Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica.",
+    "recomendacion_duplicidad": "Suspender el principio(s) activo(s) con la misma actividad farmacológica."
+  }, {
+    "atc_duplicidad": "M01AX24",
+    "descripcion_atc_duplicidad": "Oxaceprol",
+    "efecto_duplicidad": "Prescripción de dos o más medicamentos con el mismo principio activo o la misma actividad farmacológica.",
+    "recomendacion_duplicidad": "Suspender el principio(s) activo(s) con la misma actividad farmacológica."
+  }]
+}
