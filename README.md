@@ -1,2 +1,2 @@
 # Open Vademecum
-Open source drug information API.
+An open source drug information API.
