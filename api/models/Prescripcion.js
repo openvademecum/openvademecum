@@ -8,11 +8,11 @@
 module.exports = {
 
   attributes: {
-    id: {
-      type: 'integer',
-      unique: true
-
-    },
+    // id: {
+    //   type: 'integer',
+    //   unique: true
+    //
+    // },
     cod_nacion: {
       type:'integer',
       unique: true,
@@ -74,7 +74,31 @@ module.exports = {
     fec_sitreg_presen: {type:'date'},
     sw_tiene_excipientes_decl_obligatoria: {type:'integer'},
     biosimilar: {type:'integer'},
-    importacion_paralela: {type:'integer'}
+    importacion_paralela: {type:'integer'},
+
+    formasfarmaceuticas_composicion_pa:{
+      collection: 'composicion_pa',
+      via: 'prescripcion'
+    }
+    //,
+    // formasfarmaceuticas_excipientes:{
+    //   collection: 'excipientes_f',
+    //   via: 'prescripcion'
+    // },
+    // formasfarmaceuticas_viasadministracion:{
+    //   collection: 'vadmon_f',
+    //   via: 'prescripcion'
+    // },
+    // notaseguridad:{
+    //   collection: 'notaseguridad',
+    //   via: 'prescripcion'
+    //
+    // },
+    // atc_interacciones_atc:{
+    //   collection: 'interacciones_atc',
+    //   via: 'prescripcion'
+    // }
+
   }
 };
 

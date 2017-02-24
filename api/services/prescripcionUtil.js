@@ -8,10 +8,9 @@
  */
 
 const fs = require('fs');
-const _ = require('lodash');
 const XmlStream = require('xml-stream');
 const heapdump = require('heapdump');
-const flatten = require('flat')
+const flatten = require('flat');
 
 
 /******************Model Variables**********************/
@@ -56,21 +55,47 @@ module.exports.update = function () {
         xml.collect('notaseguridad');
         xml.on('endElement: ' + itemName, function (item) {
           xml.pause();
-          sails.log.info("ELEMENT: "+JSON.stringify(item));
+          //sails.log.info("ELEMENT: "+JSON.stringify(item));
 
-          var aux = flatten(item, {safe: true, maxDepth: 2, delimiter:'_' });
+          var flat = flatten(item, {safe: true, maxDepth: 2, delimiter:'_' });
 
-          sails.log.info("FLATTEN: "+JSON.stringify(aux));
+          //sails.log.info("FLATTEN: "+JSON.stringify(flat));
 
 
 
-          /*var element = item;
-          var id = item[itemIdName];
-          delete item[itemIdName];
-          item._id = id;
-          allIds.push(item._id);
+          var id = flat[itemIdName];
+          delete flat[itemIdName];
+          flat._id = id;
+          allIds.push(flat._id);
 
-          collection.findOne({_id: item._id}, function (err, oldItem) {
+          Prescripcion.findOne({id: flat._id}).exec(function(err, prescripcion){
+            if(err) return reject(err);
+            else if(prescripcion){
+              //Compare and update.
+              //Insert into updates collection.
+              updatedIds.push(flat._id);
+              xml.resume();
+
+
+            }else{
+              //sails.log.info("FLAT TO CREATE: "+JSON.stringify(flat));
+              Prescripcion.create(flat).exec(function(err, created){
+                //Insert into updates collection.
+
+                if(err) sails.log.error(err);
+                  // return reject(err);
+
+                //insertedIds.push(created._id);
+                xml.resume();
+
+
+              })
+            }
+
+          });
+
+
+          /*collection.findOne({_id: item._id}, function (err, oldItem) {
             if (err) reject(err);
 
             collection.updateOne({cod_nacion: id}, {$set: item}, {upsert: true}, function (err, results) {
@@ -109,18 +134,17 @@ module.exports.update = function () {
           });*/
         });
         xml.on('endElement: ' + endCollection, function () {
-          /*//Compare new IDS with old ones.
+          //Compare new IDS with old ones.
           var deletedIds = _.difference(ids, allIds);
 
           //Delete ids not included.
-          Prescripcion.native(function (err, collection) {
             if (err) reject(err);
 
             deletedIds.forEach(function (entry) {
               Prescripcion.findOne({_id: entry}).exec(function (err, beforeDelete) {
                 if (err) reject(err);
 
-                collection.deleteOne({_id: entry}, function (err, results) {
+                Prescripcion.destroy({_id: entry}).exec(function (err, results) {
                   if (err) reject(err);
                   Updates.create({
                     model: modelName,
@@ -133,9 +157,8 @@ module.exports.update = function () {
                   })
                 })
               })
-            })
-          });*/
-          resolve();
+            });
+          return resolve();
         });
       })
     });
