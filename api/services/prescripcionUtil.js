@@ -11,6 +11,8 @@ const fs = require('fs');
 const _ = require('lodash');
 const XmlStream = require('xml-stream');
 const heapdump = require('heapdump');
+const flatten = require('flat');
+
 
 
 /******************Model Variables**********************/
@@ -36,101 +38,75 @@ module.exports.update = function () {
 
 
     //Get all Collection IDs
-    Prescripcion.native(function (err, collection) {
-      if (err) reject(err);
-      collection.aggregate([{$group: {_id: null, ids: {$addToSet: "$_id"}}}]).toArray(function (err, results) {
-        if (err) reject(err);
-        else if (results[0] && results[0].hasOwnProperty('ids')) ids = results[0].ids;
 
-        var stream = fs.createReadStream(xmlFile);
-        var xml = new XmlStream(stream);
-        //Create or update of all entries on xml
-        xml.collect('composicion_pa');
-        xml.collect('duplicidades');
-        xml.collect('excipientes');
-        xml.collect('interacciones_atc');
-        xml.collect('desaconsejados_geriatria');
-        xml.collect('viasadministracion');
-        xml.collect('formasfarmaceuticas');
-        xml.collect('notaseguridad');
-        xml.on('endElement: ' + itemName, function (item) {
-          xml.pause();
+    var stream = fs.createReadStream(xmlFile);
+    var xml = new XmlStream(stream);
+    xml.collect('composicion_pa');
+    xml.collect('duplicidades');
+    xml.collect('excipientes');
+    xml.collect('interacciones_atc');
+    xml.collect('desaconsejados_geriatria');
+    xml.collect('viasadministracion');
+    xml.collect('notaseguridad');
+    //xml.collect('formasfarmaceuticas');
+    xml.on('endElement: ' + itemName, function (item) {
+      xml.pause();
+      var ID = item.cod_nacion;
+      var flat_item = flatten(item, {safe: true, delimiter: "_"});
+      var composicion_pa = flat_item.formasfarmaceuticas_composicion_pa;
+      delete flat_item.formasfarmaceuticas_composicion_pa;
+      var excipientes =[];
+      if(flat_item.hasOwnProperty('formasfarmaceuticas_excipientes')){
+        excipientes = flat_item.formasfarmaceuticas_excipientes;
+        delete flat_item.formasfarmaceuticas_excipientes;
+      }
 
 
-          var element = item;
-          var id = item[itemIdName];
-          delete item[itemIdName];
-          item._id = id;
-          allIds.push(item._id);
 
-          collection.findOne({_id: item._id}, function (err, oldItem) {
-            if (err) reject(err);
+      //flat_item.formasfarmaceuticas_composicion_pa = ID;
 
-            collection.updateOne({cod_nacion: id}, {$set: item}, {upsert: true}, function (err, results) {
-              if (err) reject(err);
+      Prescripcion.create(flat_item).exec(function(err,created){
+        if (err) sails.log.error("[Prescripcion] - Error creating: "+err);
+        else{
+          created.formasfarmaceuticas_composicion_pa.add(composicion_pa);
 
-              results = JSON.parse(results);
-              if (results.hasOwnProperty('upserted')) {
-                //Item inserted
-                insertedIds.push(results.upserted[0]._id);
-                Updates.create({
-                  model: modelName,
-                  new_item: element,
-                  inserted: true,
-                  updated: false,
-                  deleted: false
-                }).exec(function (err, results) {
-                  if (err) reject(err);
-                  xml.resume()
-                })
-              } else if (results['nModified'] == 1) {
-                //Item modified
-                updatedIds.push(item._id);
-                Updates.create({
-                  model: modelName,
-                  old_item: oldItem,
-                  new_item: element,
-                  inserted: false,
-                  updated: true,
-                  deleted: false
-                }).exec(function (err, results) {
-                  if (err) reject(err);
-                  xml.resume();
-                })
-              } else xml.resume();
-            })
-          });
-        });
-        xml.on('endElement: ' + endCollection, function () {
-          //Compare new IDS with old ones.
-          var deletedIds = _.difference(ids, allIds);
-
-          //Delete ids not included.
-          Prescripcion.native(function (err, collection) {
-            if (err) reject(err);
-
-            deletedIds.forEach(function (entry) {
-              Prescripcion.findOne({_id: entry}).exec(function (err, beforeDelete) {
-                if (err) reject(err);
-
-                collection.deleteOne({_id: entry}, function (err, results) {
-                  if (err) reject(err);
-                  Updates.create({
-                    model: modelName,
-                    old_item: beforeDelete,
-                    inserted: false,
-                    updated: false,
-                    deleted: true
-                  }).exec(function (err, results) {
-                    if (err) reject(err);
-                  })
-                })
+          if(excipientes){
+            excipientes.forEach(function (excip) {
+              sails.log.info("EXCIPIENTE    " +JSON.stringify(excip));
+              Excipientes.find(excip.cod_excipiente).exec(function(err, found){
+                if(err) sails.log.error("[Prescripcion] - Error: "+err);
+                else{
+                  sails.log.info("FOUND: "+JSON.stringify(found));
+                  created.formasfarmaceuticas_excipientes.add(found);
+                }
               })
             })
+          }
+
+
+          created.save(function(err) {
+            if(err) sails.log.error("[Prescripcion] - Error: "+err);
+            //xml.resume();
           });
-          resolve();
-        });
-      })
+        }
+
+      });
+
+
+
+
+
+
+
+
+
+
+
     });
+    xml.on('endElement: ' + endCollection, function () {
+
+    });
+
+
   });
 };

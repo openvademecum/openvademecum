@@ -8,72 +8,84 @@
 module.exports = {
 
   attributes: {
-    id: {
-      type: 'integer',
-      unique: true
-    },
     cod_nacion: {
       type:'integer',
       unique: true,
       primaryKey: true
     },
-    nro_definitivo: {type:'string'},
-    des_nomco: {type:'string'},
-    des_prese: {type:'string'},
-    cod_dcsa: {
-      model:'dcsa'
-    },
-    cod_dcp: {
-      model:'dcp'
-    },
-    cod_dcpf: {
-      model:'dcpf'
-    },
-    des_dosific: {type:'string'},
-    cod_envase: {
-      model:'envases'
-    },
-    contenido: {type:'integer'},
-    unid_contenido: {
-      model:'unicont'
-    },
+    nro_definitivo:'integer',
+    des_nomco: 'string',
+    des_prese: 'string',
+    cod_dcsa: {model:'dcsa'},
+    cod_dcp: {model:'dcp'},
+    cod_dcpf: {model:'dcpf'},
+    des_dosific: 'string',
+    cod_envase: {model:'envases'},
+    contenido: 'integer',
+    unid_contenido: {model:'unidadescontenido'},
     nro_conte: {type:'string'},
-    sw_psicotropo: {type:'integer'},
-    sw_estupefaciente: {type:'integer'},
-    sw_afecta_conduccion: {type:'integer'},
-    sw_triangulo_negro: {type:'integer'},
-    url_fictec: {type:'string'},
-    url_prosp: {type:'string'},
-    sw_receta: {type:'integer'},
-    sw_generico: {type:'integer'},
-    sw_sustituible: {type:'integer'},
-    sw_envase_clinico: {type:'integer'},
-    sw_uso_hospitalario: {type:'integer'},
+    sw_psicotropo: 'string',
+    lista_psicotropo : 'string',
+    sw_estupefaciente: 'string',
+    lista_estupefaciente: 'string',
+    sw_afecta_conduccion: 'string',
+    sw_triangulo_negro: 'string',
+    url_fictec: 'string',
+    url_prosp: 'string',
+    sw_receta: 'string',
+    sw_generico: 'string',
+    sw_sustituible: 'string',
+    sw_envase_clinico: 'string',
+    sw_uso_hospitalario: 'string',
     sw_diagnostico_hospitalario: {type:'integer'},
-    sw_tld: {type:'integer'},
-    sw_especial_control_medico: {type:'integer'},
-    sw_huerfano: {type:'integer'},
-    sw_base_a_plantas: {type:'integer'},
-    laboratorio_titular: {
-      model:'laboratorio'
-    },
-    laboratorio_comercializador: {
-      model:'laboratorio'
-    },
-    fecha_autorizacion: {type:'date'},
-    sw_comercializado: {type:'integer'},
-    fec_comer: {type:'date'},
+    sw_tld: 'string',
+    sw_especial_control_medico: 'string',
+    sw_huerfano: 'string',
+    sw_base_a_plantas: 'string',
+    laboratorio_titular: {model:'laboratorios'},
+    laboratorio_comercializador: {model:'laboratorios'},
+    fecha_autorizacion: 'date',
+    sw_comercializado: 'string',
+    fec_comer: 'date',
     cod_sitreg: {
-      model:'sitregistro'
+      model: 'situacionesregistro'
     },
     cod_sitreg_presen: {
-      model:'sitregistro'
+      model: 'situacionesregistro'
     },
-    fecha_situacion_registro: {type:'date'},
-    fec_sitreg_presen: {type:'date'},
-    sw_tiene_excipientes_decl_obligatoria: {type:'integer'},
-    biosimilar: {type:'integer'},
-    importacion_paralela: {type:'integer'}
+    fecha_situacion_registro: 'date',
+    fec_sitreg_presen: 'date',
+    cod_nacionales_inactivos: 'integer',
+    sw_tiene_excipientes_decl_obligatoria: 'string',
+    biosimilar: 'string',
+    importacion_paralela: 'string',
+
+    /*************** FormasFarmaceuticas ***************/
+    formasfarmaceuticas_cod_forfar: 'integer',
+    formasfarmaceuticas_cod_forfar_simplificada: 'integer',
+    formasfarmaceuticas_nro_pactiv: 'integer',
+    formasfarmaceuticas_composicion_pa: {
+      collection: 'p_composicionpa',
+      via: 'prescripcion'
+    },
+    formasfarmaceuticas_excipientes: {
+      collection: 'excipientes',
+      via: 'prescripciones',
+      dominant: true
+    },
+    //formasfarmaceuticas_viasadministracion: {model: 'viasAdministracion'}, //TODO: COLLECTION!
+
+    /****************************** ATC ******************************/
+    atc_cod_atc: 'string',
+    teratogenia: 'string',
+    //atc_interacciones_atc: {model: 'interacciones_atc'}, //TODO: COLLECTION!
+    //atc_duplicidades: {model: 'duplicidades'}, //TODO: COLLECTION!
+    //atc_desaconsejados_geriatria: {model: 'desaconsejados_geriatria'}, //TODO: COLLECTION!
+
+
+    //notaseguridad: {model: 'notaseguridad'} //TODO: COLLECTION!
+
+
   }
 };
 
