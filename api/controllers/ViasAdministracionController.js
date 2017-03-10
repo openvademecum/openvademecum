@@ -6,6 +6,9 @@
  */
 
 module.exports = {
-
+  test: function(req, res){
+    res.ok();
+    vadmonUtil.update();
+  }
 };
 

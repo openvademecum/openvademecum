@@ -35,7 +35,7 @@ module.exports.update = function () {
 
 
     //Get all Collection IDs
-    Vadmon.native(function (err, collection) {
+    ViasAdministracion.native(function (err, collection) {
       if (err) reject(err);
       collection.aggregate([{$group: {_id: null, ids: {$addToSet: "$_id"}}}]).toArray(function (err, results) {
         if (err) reject(err);
@@ -53,10 +53,10 @@ module.exports.update = function () {
           delete item[itemIdName];
           item._id = id;
           allIds.push(item._id);
-          Vadmon.findOne({_id: item._id}).exec(function (err, oldItem) {
+          ViasAdministracion.findOne({_id: item._id}).exec(function (err, oldItem) {
             if (err) reject(err);
 
-            Vadmon.native(function (err, collection) {
+            ViasAdministracion.native(function (err, collection) {
               if (err) reject(err);
 
               collection.updateOne({codigoviaadministracion: id}, {$set: item}, {upsert: true}, function (err, results) {
@@ -103,11 +103,11 @@ module.exports.update = function () {
           var deletedIds = _.difference(ids, allIds);
 
           //Delete ids not included.
-          Vadmon.native(function (err, collection) {
+          ViasAdministracion.native(function (err, collection) {
             if (err) reject(err);
 
             deletedIds.forEach(function (entry) {
-              Vadmon.findOne({_id: entry}).exec(function (err, beforeDelete) {
+              ViasAdministracion.findOne({_id: entry}).exec(function (err, beforeDelete) {
                 if (err) reject(err);
 
                 collection.deleteOne({_id: entry}, function (err, results) {

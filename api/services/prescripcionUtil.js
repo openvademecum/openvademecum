@@ -60,34 +60,48 @@ module.exports.update = function () {
         excipientes = flat_item.formasfarmaceuticas_excipientes;
         delete flat_item.formasfarmaceuticas_excipientes;
       }
+      var vias_administracion = [];
+      if(flat_item.hasOwnProperty('formasfarmaceuticas_viasadministracion')){
+        vias_administracion = flat_item.formasfarmaceuticas_viasadministracion;
+        delete flat_item.formasfarmaceuticas_viasadministracion;
+      }
 
 
 
       //flat_item.formasfarmaceuticas_composicion_pa = ID;
 
-      Prescripcion.create(flat_item).exec(function(err,created){
+      Prescripcion.create(flat_item).exec(function(err, created){
         if (err) sails.log.error("[Prescripcion] - Error creating: "+err);
         else{
+          //>>>>> composicion_pa <<<<<
           created.formasfarmaceuticas_composicion_pa.add(composicion_pa);
 
           if(excipientes){
             excipientes.forEach(function (excip) {
-              sails.log.info("EXCIPIENTE    " +JSON.stringify(excip));
-              Excipientes.find(excip.cod_excipiente).exec(function(err, found){
+              Excipientes.findOne({"_id":excip.cod_excipiente}).exec(function(err, found){
                 if(err) sails.log.error("[Prescripcion] - Error: "+err);
                 else{
-                  sails.log.info("FOUND: "+JSON.stringify(found));
-                  created.formasfarmaceuticas_excipientes.add(found);
+                  //>>>>> excipientes <<<<<
+                  created.formasfarmaceuticas_excipientes.add(found.id);
+                  if(vias_administracion){
+                    vias_administracion.forEach(function (vadmon) {
+                      sails.log.info("ID: "+JSON.stringify(vadmon));
+                      ViasAdministracion.findOne({"_id":vadmon.cod_via_admin}).exec(function (err, found) {
+                        if(err) sails.log.error("[Prescripcion] - Error: "+err);
+                        //>>>>> viasadministracion <<<<<
+                        sails.log.info("FOUND: "+JSON.stringify(found));
+                        created.formasfarmaceuticas_viasadministracion.add(found.id);
+                        created.save(function(err) {
+                          if(err) sails.log.error("[Prescripcion] - Saving Error: "+err);
+                          //xml.resume();
+                        });
+                      })
+                    })
+                  }
                 }
               })
             })
           }
-
-
-          created.save(function(err) {
-            if(err) sails.log.error("[Prescripcion] - Error: "+err);
-            //xml.resume();
-          });
         }
 
       });

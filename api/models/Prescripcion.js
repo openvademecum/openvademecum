@@ -73,7 +73,11 @@ module.exports = {
       via: 'prescripciones',
       dominant: true
     },
-    //formasfarmaceuticas_viasadministracion: {model: 'viasAdministracion'}, //TODO: COLLECTION!
+    formasfarmaceuticas_viasadministracion: {
+      collection: 'viasadministracion',
+      via: 'prescripciones',
+      dominant: true
+    },
 
     /****************************** ATC ******************************/
     atc_cod_atc: 'string',

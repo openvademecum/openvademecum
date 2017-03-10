@@ -19,7 +19,12 @@ module.exports = {
     },
     viaadministracion: {
       type:'string'
+    },
+    prescripciones:{
+      collection: 'prescripcion',
+      via: 'formasfarmaceuticas_viasadministracion'
     }
-  }
+  },
+  migrate: 'safe'
 };
 
