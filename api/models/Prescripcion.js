@@ -8,10 +8,14 @@
 module.exports = {
 
   attributes: {
-    cod_nacion: {
-      type:'integer',
+    id: {
+      type: 'integer',
       unique: true,
       primaryKey: true
+    },
+    cod_nacion: {
+      type:'integer',
+      unique: true
     },
     nro_definitivo:'integer',
     des_nomco: 'string',
@@ -82,14 +86,24 @@ module.exports = {
     /****************************** ATC ******************************/
     atc_cod_atc: 'string',
     teratogenia: 'string',
-    //atc_interacciones_atc: {model: 'interacciones_atc'}, //TODO: COLLECTION!
-    //atc_duplicidades: {model: 'duplicidades'}, //TODO: COLLECTION!
-    //atc_desaconsejados_geriatria: {model: 'desaconsejados_geriatria'}, //TODO: COLLECTION!
+    atc_interacciones_atc: {
+      collection: 'p_interacciones',
+      via: 'prescripcion'
+    },
+    atc_duplicidades: {
+      collection: 'p_duplicidades',
+      via: 'prescripcion'
+    },
+    atc_desaconsejados_geriatria: {
+      collection: 'p_desaconsejadosgeriatria',
+      via: 'prescripcion'
+    },
 
 
-    //notaseguridad: {model: 'notaseguridad'} //TODO: COLLECTION!
-
-
+    notaseguridad: {
+      collection: 'p_notasseguridad',
+      via: 'prescripcion'
+    }
   }
 };
 
