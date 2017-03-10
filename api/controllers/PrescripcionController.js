@@ -10,7 +10,12 @@ module.exports = {
 
   test: function(req, res) {
     res.ok();
-    prescripcionUtil.update();
+    excipientesUtil.update().then(function(){
+      vadmonUtil.update().then(function(){
+        prescripcionUtil.update();
+      })
+    });
+
     //excipientesUtil.update();
     //pullUtil.pull();
   }

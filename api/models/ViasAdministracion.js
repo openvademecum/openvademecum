@@ -8,14 +8,8 @@
 module.exports = {
 
   attributes: {
-    id: {
-      type: 'integer',
-      unique: true,
-      primaryKey: true
-    },
     codigoviaadministracion: {
-      type:'integer',
-      unique: true
+      type:'integer'
     },
     viaadministracion: {
       type:'string'
@@ -24,7 +18,6 @@ module.exports = {
       collection: 'prescripcion',
       via: 'formasfarmaceuticas_viasadministracion'
     }
-  },
-  migrate: 'safe'
+  }
 };
 

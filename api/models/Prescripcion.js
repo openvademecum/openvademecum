@@ -10,14 +10,12 @@ module.exports = {
   attributes: {
     id: {
       type: 'integer',
-      unique: true,
       primaryKey: true
     },
     cod_nacion: {
-      type:'integer',
-      unique: true
+      type:'integer'
     },
-    nro_definitivo:'integer',
+    nro_definitivo:'string',
     des_nomco: 'string',
     des_prese: 'string',
     cod_dcsa: {model:'dcsa'},
@@ -104,6 +102,7 @@ module.exports = {
       collection: 'p_notasseguridad',
       via: 'prescripcion'
     }
-  }
+  },
+  autoPK: false
 };
 

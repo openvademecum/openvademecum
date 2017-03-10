@@ -8,17 +8,19 @@
 module.exports = {
 
   attributes: {
-    cod_principio_activo: 'integer',
-    orden_colacion: 'integer',
-    dosis_pa: 'integer',
+    cod_principio_activo:{
+      type: 'integer'
+    },
+    orden_colacion: 'string',
+    dosis_pa: 'string',
     unidad_dosis_pa: 'string',
     dosis_composicion: 'string',
     unidad_composicion: 'string',
-    dosis_administracion: 'integer',
+    dosis_administracion: 'string',
     unidad_administracion: 'string',
     dosis_prescripcion: 'string',
     unidad_prescripcion: 'string',
-    cantidad_volumen_unidad_composicion: 'integer',
+    cantidad_volumen_unidad_composicion: 'string',
     unidad_volumen_unidad_composicion: 'string',
     cantidad_volumen_unidad_administracion: 'string',
     unidad_volumen_unidad_administracion: 'string',

@@ -8,14 +8,8 @@
 module.exports = {
 
   attributes: {
-    id: {
-      type: 'integer',
-      unique: true,
-      primaryKey: true
-    },
     codigoedo: {
-      type:'integer',
-      unique: true
+      type:'integer'
     },
     edo: {
       type:'string'
@@ -25,6 +19,5 @@ module.exports = {
       collection: 'prescripcion',
       via: 'formasfarmaceuticas_excipientes'
     }
-  },
-  migrate: 'safe'
+  }
 };
