@@ -9,7 +9,7 @@ module.exports = {
 
   attributes: {
     codigoviaadministracion: {
-      type:'integer'
+      type: 'number'
     },
     viaadministracion: {
       type:'string'

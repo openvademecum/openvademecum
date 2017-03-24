@@ -9,7 +9,7 @@ module.exports = {
 
   attributes: {
     cod_principio_activo:{
-      type: 'integer'
+      type: 'number'
     },
     orden_colacion: 'string',
     dosis_pa: 'string',

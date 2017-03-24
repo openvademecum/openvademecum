@@ -6,14 +6,11 @@
  */
 
 module.exports = {
+  primaryKey: 'id',
 
   attributes: {
-    id: {
-      type: 'integer',
-      primaryKey: true
-    },
     cod_nacion: {
-      type:'integer'
+      type: 'number'
     },
     nro_definitivo:'string',
     des_nomco: 'string',
@@ -23,7 +20,7 @@ module.exports = {
     cod_dcpf: {model:'dcpf'},
     des_dosific: 'string',
     cod_envase: {model:'envases'},
-    contenido: 'integer',
+    contenido: { type: 'number'},
     unid_contenido: {model:'unidadescontenido'},
     nro_conte: {type:'string'},
     sw_psicotropo: 'string',
@@ -39,33 +36,33 @@ module.exports = {
     sw_sustituible: 'string',
     sw_envase_clinico: 'string',
     sw_uso_hospitalario: 'string',
-    sw_diagnostico_hospitalario: {type:'integer'},
+    sw_diagnostico_hospitalario: {type: 'number'},
     sw_tld: 'string',
     sw_especial_control_medico: 'string',
     sw_huerfano: 'string',
     sw_base_a_plantas: 'string',
     laboratorio_titular: {model:'laboratorios'},
     laboratorio_comercializador: {model:'laboratorios'},
-    fecha_autorizacion: 'date',
+    fecha_autorizacion: { type: 'string', columnType: 'date' },
     sw_comercializado: 'string',
-    fec_comer: 'date',
+    fec_comer: { type: 'string', columnType: 'date' },
     cod_sitreg: {
       model: 'situacionesregistro'
     },
     cod_sitreg_presen: {
       model: 'situacionesregistro'
     },
-    fecha_situacion_registro: 'date',
-    fec_sitreg_presen: 'date',
-    cod_nacionales_inactivos: 'integer',
+    fecha_situacion_registro: { type: 'string', columnType: 'date' },
+    fec_sitreg_presen: { type: 'string', columnType: 'date' },
+    cod_nacionales_inactivos: { type: 'number'},
     sw_tiene_excipientes_decl_obligatoria: 'string',
     biosimilar: 'string',
     importacion_paralela: 'string',
 
     /*************** FormasFarmaceuticas ***************/
-    formasfarmaceuticas_cod_forfar: 'integer',
-    formasfarmaceuticas_cod_forfar_simplificada: 'integer',
-    formasfarmaceuticas_nro_pactiv: 'integer',
+    formasfarmaceuticas_cod_forfar: { type: 'number'},
+    formasfarmaceuticas_cod_forfar_simplificada: { type: 'number'},
+    formasfarmaceuticas_nro_pactiv: { type: 'number'},
     formasfarmaceuticas_composicion_pa: {
       collection: 'p_composicionpa',
       via: 'prescripcion'
@@ -102,7 +99,6 @@ module.exports = {
       collection: 'p_notasseguridad',
       via: 'prescripcion'
     }
-  },
-  autoPK: false
+  }
 };
 

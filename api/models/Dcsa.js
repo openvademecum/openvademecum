@@ -6,15 +6,12 @@
  */
 
 module.exports = {
+  primaryKey: 'id',
 
   attributes: {
-    id: {
-      type: 'integer',
-      unique: true,
-      primaryKey: true
-    },
+
     codigodcsa: {
-      type:'integer',
+      type: 'number',
       unique: true
     },
     nombredcsa: {

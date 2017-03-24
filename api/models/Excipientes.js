@@ -9,7 +9,7 @@ module.exports = {
 
   attributes: {
     codigoedo: {
-      type:'integer'
+      type: 'number'
     },
     edo: {
       type:'string'

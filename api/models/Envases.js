@@ -7,14 +7,10 @@
 
 module.exports = {
 
+  primaryKey: 'id',
   attributes: {
-    id: {
-      type: 'integer',
-      unique: true,
-      primaryKey: true
-    },
     codigoenvase: {
-      type:'integer',
+      type: 'number',
       unique: true
     },
     envase: {

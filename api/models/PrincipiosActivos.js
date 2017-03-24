@@ -6,15 +6,10 @@
  */
 
 module.exports = {
-
+  primaryKey: 'id',
   attributes: {
-    id: {
-      type: 'integer',
-      unique: true,
-      primaryKey: true
-    },
     nroprincipioactivo: {
-      type:'integer',
+      type: 'number',
       unique: true
     },
     codigoprincipioactivo: {

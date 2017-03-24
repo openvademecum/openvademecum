@@ -8,7 +8,9 @@
 module.exports = {
 
   attributes: {
-    atc_duplicidad: 'string',
+    atc_duplicidad: {
+      model: 'atc'
+    },
     descripcion_atc_duplicidad: 'string',
     efecto_duplicidad: 'string',
     recomendacion_duplicidad: 'string',

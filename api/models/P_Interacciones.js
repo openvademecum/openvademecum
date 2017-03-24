@@ -8,7 +8,9 @@
 module.exports = {
 
   attributes: {
-    atc_interaccion: 'string',
+    atc_interaccion: {
+      model: 'atc'
+    },
     descripcion_atc_interaccion: 'string',
     efecto_interaccion: 'string',
     recomendacion_interaccion: 'string',

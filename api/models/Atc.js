@@ -8,15 +8,11 @@
 var _ = require('underscore');
 
 module.exports = {
+  primaryKey: 'id',
 
   attributes: {
-    id: {
-      type: 'integer',
-      unique: true,
-      primaryKey: true
-    },
     nroatc: {
-      type: 'integer',
+      type: 'number',
       unique: true
     },
     codigoatc: {
@@ -26,6 +22,5 @@ module.exports = {
     descatc: {
       type: 'string'
     }
-  },
-  autoPK: false
+  }
 };

@@ -1,29 +1,26 @@
 {
   "name": "openvademecum",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Open source drug information API",
   "keywords": [],
   "dependencies": {
     "@nodemailer/pro": "^1.0.0",
+    "async": "2.0.1",
     "flat": "^2.0.1",
-    "heapdump": "^0.3.7",
-    "include-all": "^1.0.0",
-    "lodash": "^4.17.4",
-    "newrelic": "^1.36.2",
-    "rc": "1.0.1",
-    "request": "^2.79.0",
-    "sails": "~0.12.11",
-    "sails-hook-cron": "^2.2.0",
-    "sails-mongo": "^0.12.2",
-    "sails-swagger": "^0.5.1",
-    "underscore": "^1.8.3",
+    "lodash": "3.10.1",
+    "request": "^2.81.0",
+    "sails": "^1.0.0-32",
+    "sails-hook-orm": "^2.0.0-0",
+    "sails-hook-sockets": "^1.0.1",
+    "sails-mongo": "^1.0.0-5",
     "unzip": "^0.1.11",
     "xml-stream": "^0.4.5"
   },
   "scripts": {
-    "debug": "node debug app.js",
-    "start": "node --expose-gc --max_old_space_size=500 app.js"
+    "start": "NODE_ENV=production node app.js",
+    "test": "echo && echo \"* * * * * * * * * * * * * * * * * * * * * * * * * * * \" && echo \"About to run tests...\" && echo && if ! node ./node_modules/mocha/bin/mocha --timeout 10000 ; then echo && echo && echo \"- - -\" && echo \"Looks like something went wrong.\" && echo \"|  If you are not sure what to do next, try:\" && echo \"|  npm install mocha --save-dev\" && echo \"|  \" && echo \"|  And then:\" && echo \"|  mkdir test/\" && echo ; fi",
+    "debug": "node debug app.js"
   },
   "main": "app.js",
   "repository": {

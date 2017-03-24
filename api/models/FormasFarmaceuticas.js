@@ -6,22 +6,18 @@
  */
 
 module.exports = {
+  primaryKey: 'id',
 
   attributes: {
-    id: {
-      type: 'integer',
-      unique: true,
-      primaryKey: true
-    },
     codigoformafarmaceutica: {
-      type:'integer',
+      type: 'number',
       unique: true
     },
     formafarmaceutica: {
       type:'string'
     },
     codigoformafarmaceuticasimplificada: {
-      type:'integer'
+      type: 'number'
     }
   }
 };

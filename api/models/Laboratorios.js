@@ -6,15 +6,11 @@
  */
 
 module.exports = {
+  primaryKey: 'id',
 
   attributes: {
-    id: {
-      type: 'integer',
-      unique: true,
-      primaryKey: true
-    },
     codigolaboratorio: {
-      type:'integer',
+      type: 'number',
       unique: true
     },
     laboratorio: {
