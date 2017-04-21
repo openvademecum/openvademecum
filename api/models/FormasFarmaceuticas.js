@@ -6,9 +6,12 @@
  */
 
 module.exports = {
-  primaryKey: 'id',
 
   attributes: {
+    id: {
+      type: 'number',
+      required: true,
+    },
     codigoformafarmaceutica: {
       type: 'number',
       unique: true

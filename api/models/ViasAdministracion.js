@@ -8,6 +8,10 @@
 module.exports = {
 
   attributes: {
+    id: {
+      type: 'number',
+      required: true,
+    },
     codigoviaadministracion: {
       type: 'number'
     },
@@ -16,7 +20,8 @@ module.exports = {
     },
     prescripciones:{
       collection: 'prescripcion',
-      via: 'formasfarmaceuticas_viasadministracion'
+      via: 'via_administracion',
+      through: 'prescripcionviaadministracion'
     }
   }
 };

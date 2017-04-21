@@ -23,7 +23,7 @@ module.exports = {
     //excipientesUtil.update();
     //pullUtil.pull();
 
-    sails.helpers.prescripcionHelper().exec(function(err, result) {
+    sails.helpers.prescripcion().exec(function(err, result) {
       if (err) { /*...handle error and return...*/ return res.serverError(err); }
       /* ...process result... */
       sails.log('Ok it worked!  The result is:', result);

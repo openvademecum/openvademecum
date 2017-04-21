@@ -8,6 +8,10 @@
 module.exports = {
 
   attributes: {
+    id: {
+      type: 'number',
+      required: true,
+    },
     codigoedo: {
       type: 'number'
     },
@@ -17,7 +21,8 @@ module.exports = {
 
     prescripciones:{
       collection: 'prescripcion',
-      via: 'formasfarmaceuticas_excipientes'
+      via: 'excipiente',
+      through: 'prescripcionexcipientes'
     }
   }
 };

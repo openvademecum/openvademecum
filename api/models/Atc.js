@@ -5,19 +5,18 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-var _ = require('underscore');
-
 module.exports = {
-  primaryKey: 'id',
 
   attributes: {
-    nroatc: {
+    id: {
       type: 'number',
-      unique: true
+      required: true,
+    },
+    nroatc: {
+      type: 'number'
     },
     codigoatc: {
-      type: 'string',
-      unique: true
+      type: 'string'
     },
     descatc: {
       type: 'string'

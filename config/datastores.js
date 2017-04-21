@@ -48,8 +48,8 @@ module.exports.datastores = {
     *    (See http://sailsjs.com/config/datastores for help.)                  *
     *                                                                          *
     ***************************************************************************/
-    // adapter: require('sails-mysql'),
-    // url: 'mysql://user:password@host:port/database',
+    //adapter: require('sails-mysql'),
+    //url: 'mysql://root@localhost:3306/openvademecum',
 
 
     adapter: require('sails-mongo'),

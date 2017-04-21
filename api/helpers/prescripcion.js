@@ -115,36 +115,37 @@ module.exports = {
         delete flat_item.notaseguridad;
       }
 
-
+//TODO: Update this use.
       Prescripcion.create(flat_item).exec(function (err, created) {
         if (err){
           sails.log.error('[Prescripcion] - Error creating: ' + err);
         }
-        else {
-          created.formasfarmaceuticas_composicion_pa.add(composicion_pa);
-          created.atc_interacciones_atc.add(atc_interacciones_atc);
-          created.atc_duplicidades.add(atc_duplicidades);
-          created.atc_desaconsejados_geriatria.add(atc_desaconsejados_geriatria);
-          created.notaseguridad.add(notaseguridad);
-          addExcipientes(excipientes).then(function (ids) {
-            created.formasfarmaceuticas_excipientes.add(ids);
-
-            addViasAdmon(vias_administracion).then(function (ids) {
-              created.formasfarmaceuticas_viasadministracion.add(ids);
-            }).then(function () {
-              created.save(function (err) {
-                if (err) {
-                  sails.log.error('[Prescripcion] - Saving collections ERROR: ' + JSON.stringify(err));
-                  sails.log.info('Prescription ID: ' + flat_item.id);
-                  sails.log.info('Full Prescription: ' + JSON.stringify(flat_item));
-                }
-                else {
-                  xml.resume();
-                }
-              });
-            });
-          });
-        }
+        xml.resume();
+        // else {
+        //   created.formasfarmaceuticas_composicion_pa.add(composicion_pa);
+        //   created.atc_interacciones_atc.add(atc_interacciones_atc);
+        //   created.atc_duplicidades.add(atc_duplicidades);
+        //   created.atc_desaconsejados_geriatria.add(atc_desaconsejados_geriatria);
+        //   created.notaseguridad.add(notaseguridad);
+        //   addExcipientes(excipientes).then(function (ids) {
+        //     created.formasfarmaceuticas_excipientes.add(ids);
+        //
+        //     addViasAdmon(vias_administracion).then(function (ids) {
+        //       created.formasfarmaceuticas_viasadministracion.add(ids);
+        //     }).then(function () {
+        //       created.save(function (err) {
+        //         if (err) {
+        //           sails.log.error('[Prescripcion] - Saving collections ERROR: ' + JSON.stringify(err));
+        //           sails.log.info('Prescription ID: ' + flat_item.id);
+        //           sails.log.info('Full Prescription: ' + JSON.stringify(flat_item));
+        //         }
+        //         else {
+        //           xml.resume();
+        //         }
+        //       });
+        //     });
+        //   });
+        // }
       });
     });
     xml.on('endElement: ' + endCollection, function () {

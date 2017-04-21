@@ -33,7 +33,7 @@ module.exports.models = {
 
   migrate: 'drop',
 
-
+  dontUseObjectIds: true,
   /***************************************************************************
   *                                                                          *
   * Base attributes that are included in all of your models by default.      *
@@ -48,7 +48,7 @@ module.exports.models = {
   attributes: {
     createdAt: { type: 'number', autoCreatedAt: true, },
     updatedAt: { type: 'number', autoUpdatedAt: true, },
-    id: { type: 'string', columnName: '_id' },
+    id: { type: 'number', columnName: '_id' },
     //--------------------------------------------------------------------------
     //  /\   Using MongoDB?
     //  ||   Replace `id` above with this instead:

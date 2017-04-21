@@ -6,8 +6,11 @@
  */
 
 module.exports = {
-  primaryKey: 'id',
   attributes: {
+    id: {
+      type: 'number',
+      required: true,
+    },
     codigodcpf: {
       type: 'number',
       unique: true

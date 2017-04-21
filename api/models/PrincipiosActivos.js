@@ -6,8 +6,12 @@
  */
 
 module.exports = {
-  primaryKey: 'id',
+
   attributes: {
+    id: {
+      type: 'number',
+      required: true,
+    },
     nroprincipioactivo: {
       type: 'number',
       unique: true
